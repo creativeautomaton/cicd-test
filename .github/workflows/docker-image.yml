@@ -32,8 +32,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $REPO_NAME:$(date +%s) 
-     
-    - name: Docker Push
-      run: docker push $DOCKER_USER/$REPO_NAME:$(date +%s) 
+    #- name: Build the Docker image
+    #  run: docker build . --file Dockerfile --tag $REPO_NAME:$(date +%s) 
+      
+    - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
