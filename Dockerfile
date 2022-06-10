@@ -12,7 +12,7 @@ COPY package.json /usr/src/app
 COPY . /usr/src/app
 
 #install npm dependencies
-RUN npm ci 
+RUN npm i 
 
 ENV PORT=3000
 ENV HOST=0.0.0.0 
