@@ -4,6 +4,7 @@ name: Docker Image CI
 env:
   DOCKER_USER: ${{secrets.DOCKER_USER}}
   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  DOCKER_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
   REPO_NAME: 'github-test'
   #${{secrets.REPO_NAME}}
   
@@ -23,7 +24,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
   build:
 
