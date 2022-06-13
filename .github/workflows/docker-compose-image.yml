@@ -5,21 +5,13 @@ env:
   DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-  DOCKER_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
-  REPO_NAME: 'github-test'
-  #${{secrets.REPO_NAME}} 
-
-  DATABASE_URL: ${{ secrets.DATABASE_URL }} 
-  SECRET_KEY: ${{ secrets.SECRET_KEY }} 
-  PG_DB: ${{ secrets.PG_DB }}
-  PG_PASS: ${{ secrets.PG_PASS }}
-  PG_USER: ${{ secrets.USER }}
+  DOCKER_TOKEN: ${{secrets.DOCKERHUB_TOKEN}} 
   
 on:
   push:
     branches: [ "main" ]
-  #pull_request:
-    #branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
  
 jobs:  
   docker:
