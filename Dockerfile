@@ -1,5 +1,5 @@
 # ./Dockerfile
-FROM node:latest as svelte
+FROM node:latest
 LABEL authors="creative"
 
 WORKDIR /usr/src/app
