@@ -56,7 +56,7 @@ jobs:
         run: docker compose -v 
         
       - name: Build the docker-compose stack  
-        run: docker compose up -d --build --no-cache --remove-orphans
+        run: docker compose up -d --build --remove-orphans
         
       - name: Docker image list
         run: docker image ls
