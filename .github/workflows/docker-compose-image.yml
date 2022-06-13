@@ -39,7 +39,7 @@ jobs:
         run: docker compose up -d --build
         
       - name: dockerhub push 
-        run: docker-compose push 
+        run: docker compose push 
         
-      - name: Sleep
-        uses: jakejarvis/wait-action@master 
+      #- name: Sleep
+      #  uses: jakejarvis/wait-action@master 
