@@ -36,8 +36,8 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v1
         
-      - name: Docker compose pull test 
-        run: docker-compose --verbose pull
+      - name: Docker compose version
+        run: docker-compose -v
         
       - name: Build the docker-compose stack  
         run: docker-compose up -d -no-cache
