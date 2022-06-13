@@ -39,6 +39,9 @@ jobs:
       - name: Docker compose version
         run: docker-compose -v
         
+      - name: Docker image list
+        run: docker image ls
+        
       - name: Build the docker-compose stack  
         run: docker-compose up -d -no-cache
         
