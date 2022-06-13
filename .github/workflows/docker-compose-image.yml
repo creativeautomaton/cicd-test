@@ -39,7 +39,7 @@ jobs:
       #  run: docker=compose up -d -no-cache
         
       - name: dockerhub push   
-        run: docker-compose push 
+        run: docker-compose push docker-compose ${{ secrets.DOCKERHUB_USERNAME }}/cicdtest
         
       #- name: Sleep
       #  uses: jakejarvis/wait-action@master 
