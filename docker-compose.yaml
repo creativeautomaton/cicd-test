@@ -55,8 +55,8 @@ services:
   api:
     depends_on:
       - postgres
-    #image: strapi/strapi
-    image: creativeautomaton/strapi/strapi  # goes to your repository on Docker Hub
+    image: strapi/strapi
+    #image: creativeautomaton/strapi/strapi  # goes to your repository on Docker Hub
     restart: unless-stopped
     container_name: strapi_cms
     environment:
@@ -77,7 +77,7 @@ services:
   postgres:
     container_name: postgres_db
     restart: unless-stopped
-    image: creativeautomaton/postgres:latest
+    image:  postgres:latest
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
@@ -89,7 +89,7 @@ services:
 
   pgadmin:
     container_name: pgadmin
-    image: creativeautomaton/dpage/pgadmin4:latest
+    image:  dpage/pgadmin4:latest
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_MAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PW}
