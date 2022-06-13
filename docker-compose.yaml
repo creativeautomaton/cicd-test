@@ -55,8 +55,8 @@ services:
   api:
     depends_on:
       - postgres
-    image: strapi/strapi
-    #image: ${DOCKERHUB_USERNAME}/strapi/strapi  # goes to your repository on Docker Hub
+    #image: strapi/strapi
+    image: ${DOCKERHUB_USERNAME}/cicdtest/strapi/strapi  # goes to your repository on Docker Hub
     restart: unless-stopped
     container_name: strapi_cms
     environment:
