@@ -35,11 +35,11 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v1
         
-      # - name: Build the docker-compose stack 
-      #  run: docker=compose up -d -no-cache
+      - name: Build the docker-compose stack 
+        run: docker-compose up -d -no-cache
         
       - name: dockerhub push   
-        run: docker-compose push creativeautomaton/cicdtest:latest
+        run: docker-compose push creativeautomaton/cicdtest
         
       #- name: Sleep
       #  uses: jakejarvis/wait-action@master 
