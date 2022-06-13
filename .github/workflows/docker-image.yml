@@ -46,6 +46,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: . 
-          load: true
+          #load: true
           push: true
           tags: creativeautomaton/cicd-test:latest
