@@ -1,0 +1,8 @@
+FROM node:14.17.3-alpine3.14
+
+WORKDIR /srv/app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+CMD ["npm", "run", "develop" ]
