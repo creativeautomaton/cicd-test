@@ -87,4 +87,4 @@ jobs:
             pwd
             git clone git@github.com:creativeautomaton/cicd-test.git
             cd cicd-test
-            docker compose up -d
+            docker compose up -d 
