@@ -1,12 +1,12 @@
 name: Docker Compose Image CI
 
 # env variables
-env: 
+env:
   #DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   #DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-  DOCKER_TOKEN: ${{secrets.DOCKERHUB_TOKEN}} 
+  DOCKER_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
   #DOCKER_HOST: ssh://root:${{ secrets.DOCKER_HOST_PASSWORD}}@168.235.69.236
-  
+
   #HOST: 0.0.0.0
   #PORT: 1337
   DATABASE_CLIENT: postgres
@@ -15,14 +15,14 @@ env:
   DATABASE_PORT: 5432
   DATABASE_USERNAME: my_user
   DATABASE_PASSWORD: my_root_password
-  DATABASE_DB: strapi 
+  DATABASE_DB: strapi
   POSTGRES_USER: strapi
   POSTGRES_PW: strapi
   POSTGRES_DB: postgres
   PGADMIN_MAIL: user@domain.com
   PGADMIN_PW: SuperSecret
-  
-  #SSH deploy to server action env  
+
+  #SSH deploy to server action env
   SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
   #ARGS: "-rltgoDzvO"
   #SOURCE: "dist/"
@@ -32,53 +32,57 @@ env:
   #${{ secrets.REMOTE_TARGET }}
   #EXCLUDE: "/dist/, /node_modules/"
 
-  
+
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
- 
-jobs:  
+
+jobs:
   docker:
     runs-on: ubuntu-latest
-    steps: 
-      #- name: Checkout 
-      #  uses: actions/checkout@v3 
+    steps:
+      #- name: Checkout
+      #  uses: actions/checkout@v3
       #-
       #  name: Login to Docker Hub
       #  uses: docker/login-action@v1
       #  with:
       #    username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #    password: ${{ secrets.DOCKERHUB_TOKEN }} 
-        
+      #    password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       #- name: Docker compose rm
       #  run: docker compose rm -f
-        
+
       #- name: Docker compose pull new images
       # run: docker compose pull
-       
+
       #- name: Docker compose version
-      #  run: docker compose -v 
-        
-      #- name: Build the docker-compose stack  
+      #  run: docker compose -v
+
+      #- name: Build the docker-compose stack
       #  run: docker compose up -d --build
-        
+
       #- name: Docker image list
       #  run: docker image ls
-        
-      #- name: Dockerhub push 
+
+      #- name: Dockerhub push
       #  run: docker compose push
-        
+
       #- name: Deploy to Staging server
-      #  uses: easingthemes/ssh-deploy@main 
-      
+      #  uses: easingthemes/ssh-deploy@main
+
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.REMOTE_PASSWORD }}
+          #password: ${{ secrets.REMOTE_PASSWORD }}
+          key: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
           #port: ${{ secrets.PORT }}
-          script: whoami
-     
+          script: |
+            whoami
+            git clone https://github.com/creativeautomaton/cicd-test.git
+            cd cicd-test
+            docker compose up -d
