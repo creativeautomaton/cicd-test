@@ -22,6 +22,15 @@ env:
   POSTGRES_DB: postgres
   PGADMIN_MAIL: user@domain.com
   PGADMIN_PW: SuperSecret
+  
+  #SSH deploy to server action env  
+  #SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+  #ARGS: "-rltgoDzvO"
+  #SOURCE: "dist/"
+  #REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+  #REMOTE_USER: ${{ secrets.REMOTE_USER }}
+  #TARGET: ${{ secrets.REMOTE_TARGET }}
+  #EXCLUDE: "/dist/, /node_modules/"
 
   
 on:
@@ -33,13 +42,9 @@ on:
 jobs:  
   docker:
     runs-on: ubuntu-latest
-    steps:
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+    steps: 
+      - name: Checkout 
+        uses: actions/checkout@v3
       
       -
         name: Login to Docker Hub
@@ -47,32 +52,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-      - name: Checkout 
-        uses: actions/checkout@v3
+            
         
-      - name: Docker context ls
-        run: docker context ls 
+      - name: Docker compose rm
+        run: docker compose rm -f
         
-      - name: check export
-        run: export
-        
-      - name: Docker context
-        run: docker context create \
-             --docker host=${{secrets.DOCKER_HOST}} \ 
-             remote 
-        
-      - name: Docker context Switch
-        run: docker context use remote
-        
-      #- name: Docker compose rm
-      #  run: docker compose rm -f
-        
-      #- name: Docker compose pull new images
-      #  run: docker compose pull
-      
-     
-        
+      - name: Docker compose pull new images
+        run: docker compose pull
+       
       - name: Docker compose version
         run: docker compose -v 
         
@@ -85,5 +72,6 @@ jobs:
       - name: Dockerhub push 
         run: docker compose push
         
-      #- name: Sleep
-      #  uses: jakejarvis/wait-action@master 
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main 
+     
