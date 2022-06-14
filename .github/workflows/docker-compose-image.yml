@@ -23,12 +23,13 @@ env:
   PGADMIN_PW: SuperSecret
   
   #SSH deploy to server action env  
-  #SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+  REMOTE_SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
   #ARGS: "-rltgoDzvO"
   #SOURCE: "dist/"
-  #REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-  #REMOTE_USER: ${{ secrets.REMOTE_USER }}
-  #TARGET: ${{ secrets.REMOTE_TARGET }}
+  REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+  REMOTE_USER: ${{ secrets.REMOTE_USER }}
+  TARGET: '../cdek/deploy/'
+  #${{ secrets.REMOTE_TARGET }}
   #EXCLUDE: "/dist/, /node_modules/"
 
   
