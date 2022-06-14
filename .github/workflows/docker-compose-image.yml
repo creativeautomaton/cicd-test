@@ -52,6 +52,9 @@ jobs:
       - name: Docker context ls
         run: docker context ls
         
+      - name: dock_host export
+        run: export DOCKER_HOST=ssh://root:${{ secrets.DOCKERHUB_PASSWORD}}@168.235.69.236
+        
       - name: check export
         run: export
         
