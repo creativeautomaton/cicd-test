@@ -58,7 +58,9 @@ jobs:
         run: export
         
       - name: Docker context
-        run: docker context create remote ‐‐docker “host=${{secrets.DOCKER_HOST}}”
+        run: docker context create \
+             --docker host=${{secrets.DOCKER_HOST}} \ 
+             remote 
         
       - name: Docker context Switch
         run: docker context use remote
