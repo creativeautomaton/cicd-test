@@ -1,12 +1,11 @@
 name: Docker Compose Image CI
 
 # env variables
-env:
-  DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+env: 
+  #DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  #DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
   DOCKER_TOKEN: ${{secrets.DOCKERHUB_TOKEN}} 
-  DOCKER_HOST: ssh://root:${{ secrets.DOCKER_HOST_PASSWORD}}@168.235.69.236
+  #DOCKER_HOST: ssh://root:${{ secrets.DOCKER_HOST_PASSWORD}}@168.235.69.236
   
   #HOST: 0.0.0.0
   #PORT: 1337
