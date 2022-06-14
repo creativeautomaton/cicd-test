@@ -63,6 +63,9 @@ jobs:
         
       #- name: Docker compose pull new images
       #  run: docker compose pull
+      
+      - name: check export
+        run: export
         
       - name: Docker compose version
         run: docker compose -v 
