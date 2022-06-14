@@ -49,8 +49,8 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v3
         
-      - name: Docker compose stop
-        run: docker compose stop
+      - name: Docker context
+        run: docker context ls
         
       - name: Docker compose rm
         run: docker compose rm -f
