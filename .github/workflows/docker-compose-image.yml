@@ -78,11 +78,12 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          #password: ${{ secrets.REMOTE_PASSWORD }}
-          key: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          #key: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
           #port: ${{ secrets.PORT }}
           script: |
             whoami
+            cd ../cdek/deploy ; bash --login
             git clone https://github.com/creativeautomaton/cicd-test.git
             cd cicd-test
             docker compose up -d
