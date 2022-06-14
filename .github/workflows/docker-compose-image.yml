@@ -52,17 +52,23 @@ jobs:
       - name: Docker context
         run: docker context ls
         
-      - name: Docker compose rm
-        run: docker compose rm -f
+      - name: Docker context
+        run: docker context create remote ‐‐docker “host=ssh://root:${{ secrets.DOCKERHUB_PASSWORD}}@168.235.69.236”
         
-      - name: Docker compose pull new images
-        run: docker compose pull
+      - name: Docker context Switch
+        run: docker context use remote
+        
+      #- name: Docker compose rm
+      #  run: docker compose rm -f
+        
+      #- name: Docker compose pull new images
+      #  run: docker compose pull
         
       - name: Docker compose version
         run: docker compose -v 
         
       - name: Build the docker-compose stack  
-        run: docker compose up -d --build --remove-orphans
+        run: docker compose ‐‐context remote up -d --build --remove-orphans
         
       - name: Docker image list
         run: docker image ls
