@@ -6,18 +6,17 @@ env:
   #DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
   DOCKER_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
   #DOCKER_HOST: ssh://root:${{ secrets.DOCKER_HOST_PASSWORD}}@168.235.69.236
-
   #HOST: 0.0.0.0
   #PORT: 1337
-  DATABASE_CLIENT: postgres
-  DATABASE_NAME: db_strapi
-  DATABASE_HOST: postgres
+  DATABASE_CLIENT: "postgres"
+  DATABASE_NAME: "db_strapi"
+  DATABASE_HOST: "postgres"
   DATABASE_PORT: 5432
-  DATABASE_USERNAME: my_user
-  DATABASE_PASSWORD: my_root_password
-  DATABASE_DB: strapi
-  POSTGRES_USER: strapi
-  POSTGRES_PW: strapi
+  DATABASE_USERNAME: "my_user"
+  DATABASE_PASSWORD: "my_root_password"
+  DATABASE_DB: "strapi"
+  POSTGRES_USER: "strapi"
+  POSTGRES_PW: "strapi"
   POSTGRES_DB: postgres
   PGADMIN_MAIL: user@domain.com
   PGADMIN_PW: SuperSecret
@@ -85,6 +84,7 @@ jobs:
             whoami
             cd ../cdek/deploy
             pwd
-            git clone git@github.com:creativeautomaton/cicd-test.git
+            # git clone git@github.com:creativeautomaton/cicd-test.git
+            git pull
             cd cicd-test
             docker compose up -d
