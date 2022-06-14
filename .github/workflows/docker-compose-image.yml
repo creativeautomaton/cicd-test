@@ -49,8 +49,11 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v3
         
-      - name: Docker context
+      - name: Docker context ls
         run: docker context ls
+        
+      - name: check export
+        run: export
         
       - name: Docker context
         run: docker context create remote ‐‐docker “host=ssh://root:${{ secrets.DOCKERHUB_PASSWORD}}@168.235.69.236”
@@ -64,8 +67,7 @@ jobs:
       #- name: Docker compose pull new images
       #  run: docker compose pull
       
-      - name: check export
-        run: export
+     
         
       - name: Docker compose version
         run: docker compose -v 
