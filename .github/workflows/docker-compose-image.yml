@@ -51,17 +51,17 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }} 
         
-      - name: Docker compose rm
-        run: docker compose rm -f
+      #- name: Docker compose rm
+      #  run: docker compose rm -f
         
-      - name: Docker compose pull new images
-        run: docker compose pull
+      #- name: Docker compose pull new images
+      # run: docker compose pull
        
       - name: Docker compose version
         run: docker compose -v 
         
       - name: Build the docker-compose stack  
-        run: docker compose up -d --build --remove-orphans
+        run: docker compose up -d --build
         
       - name: Docker image list
         run: docker image ls
