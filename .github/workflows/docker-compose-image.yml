@@ -84,8 +84,8 @@ jobs:
             whoami
             cd ../cdek/deploy
             pwd
-            # git clone git@github.com:creativeautomaton/cicd-test.git
-            git pull:latest
+            # git clone git@github.com:creativeautomaton/cicd-test.git 
             cd cicd-test
+            git pull
             openssl enc -d -aes256 -in env.vault -out .env -k ${{ secrets.ENV_VAULT_PASSWORD }}
             docker compose up -d
