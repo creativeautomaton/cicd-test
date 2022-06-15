@@ -26,32 +26,6 @@ services:
     expose:
       - "80"
 
-  # strapi-cli:
-  #   depends_on:
-  #     - postgres
-  #   build:
-  #     context: cli-strapi
-  #     dockerfile: ./Dockerfile
-  #   restart: unless-stopped
-  #   container_name: strapi_cli
-  #   environment:
-  #     APP_NAME: strapi-app2
-  #     DATABASE_CLIENT: ${DATABASE_CLIENT}
-  #     DATABASE_HOST: ${DATABASE_HOST}
-  #     DATABASE_PORT: ${DATABASE_PORT}
-  #     DATABASE_NAME: ${DATABASE_NAME}
-  #     DATABASE_DB: ${DATABASE_DB}
-  #     DATABASE_USERNAME: ${DATABASE_USERNAME}
-  #     DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-  #     DATABASE_SSL: "false"
-  #   ports:
-  #     - 1337:1337
-  #   expose:
-  #     - "1337"
-  #   volumes:
-  #       - ./cli-strapi:/srv/app
-
-
   api:
     depends_on:
       - postgres
@@ -73,8 +47,8 @@ services:
     ports:
       - 8080:1337
     volumes:
-      - ./cms:/srv/cms
-      - ./cms/srv:/srv/app
+      # - ./cms:/srv/cms
+      - ./strapi:/srv/app
 
   postgres:
     container_name: postgres_db_2
@@ -84,8 +58,9 @@ services:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME} #optional (specify default database instead of $POSTGRES_USER)
+      PGPORT: 5433
     ports:
-      - "5432:5432"
+      - "5433:5433"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
