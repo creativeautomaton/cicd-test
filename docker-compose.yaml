@@ -55,9 +55,9 @@ services:
   api:
     depends_on:
       - postgres
-    # image: strapi/strapi:3.6.8-node14
+    image: strapi/strapi:3.6.8-node14
     # image: strapi/strapi:ready2  # goes to your repository on Docker Hub
-    image: 376490814484.dkr.ecr.us-east-1.amazonaws.com/test-private:ready2
+    # image: 376490814484.dkr.ecr.us-east-1.amazonaws.com/test-private:ready2
     restart: unless-stopped
     container_name: strapi_cms_2
     environment:
