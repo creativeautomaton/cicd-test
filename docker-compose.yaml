@@ -7,7 +7,7 @@ services:
       - ./svelte:/usr/src/app
       - /usr/src/app/node_modules
       # - "~/.gitconfig:/etc/gitconfig"
-    container_name: svelte-dev_2
+    container_name: svelte-dev
     restart: always
     stdin_open: true
     ports:
@@ -19,7 +19,7 @@ services:
     build:
       context: svelte
       dockerfile: ./Dockerfile.prod
-    container_name: svelte-production_2
+    container_name: svelte-prod
     restart: always
     ports:
       - "80:80"
@@ -30,10 +30,8 @@ services:
     depends_on:
       - postgres
     image: strapi/strapi:3.6.8-node14
-    # image: strapi/strapi:ready2  # goes to your repository on Docker Hub
-    # image: 376490814484.dkr.ecr.us-east-1.amazonaws.com/test-private:ready2
     restart: unless-stopped
-    container_name: strapi_cms_2
+    container_name: strapi_cms
     environment:
       APP_NAME: strapi-app
       DATABASE_CLIENT: ${DATABASE_CLIENT}
@@ -65,7 +63,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   pgadmin:
-    container_name: pgadmin_2
+    container_name: pgadmin
     image:  dpage/pgadmin4:latest
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_MAIL}
