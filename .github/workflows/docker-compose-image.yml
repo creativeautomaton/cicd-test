@@ -2,35 +2,15 @@ name: Docker Compose Image CI
 
 # env variables
 env:
-  #DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   #DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
   DOCKER_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
   #DOCKER_HOST: ssh://root:${{ secrets.DOCKER_HOST_PASSWORD}}@168.235.69.236
-  #HOST: 0.0.0.0
-  #PORT: 1337
-  DATABASE_CLIENT: "postgres"
-  DATABASE_NAME: "db_strapi"
-  DATABASE_HOST: "postgres"
-  DATABASE_PORT: 5432
-  DATABASE_USERNAME: "my_user"
-  DATABASE_PASSWORD: "my_root_password"
-  DATABASE_DB: "strapi"
-  POSTGRES_USER: "strapi"
-  POSTGRES_PW: "strapi"
-  POSTGRES_DB: postgres
-  PGADMIN_MAIL: user@domain.com
-  PGADMIN_PW: SuperSecret
 
   #SSH deploy to server action env
   SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
-  #ARGS: "-rltgoDzvO"
-  #SOURCE: "dist/"
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-  REMOTE_USER: ${{ secrets.REMOTE_USER }}
-  TARGET: '../cdek/deploy/'
-  #${{ secrets.REMOTE_TARGET }}
-  #EXCLUDE: "/dist/, /node_modules/"
-
+  REMOTE_USER: ${{ secrets.REMOTE_USER }}  
 
 on:
   push:
