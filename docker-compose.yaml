@@ -49,7 +49,7 @@ services:
       - ./strapi:/srv/app
 
   postgres:
-    container_name: postgres_db_2
+    container_name: postgres_db
     restart: unless-stopped
     image:  postgres:latest
     environment:
