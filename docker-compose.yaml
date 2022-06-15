@@ -55,8 +55,9 @@ services:
   api:
     depends_on:
       - postgres
-    image: strapi/strapi
-    #image: creativeautomaton/strapi/strapi  # goes to your repository on Docker Hub
+    # image: strapi/strapi:3.6.8-node14
+    # image: strapi/strapi:ready2  # goes to your repository on Docker Hub
+    image: 376490814484.dkr.ecr.us-east-1.amazonaws.com/test-private:ready2
     restart: unless-stopped
     container_name: strapi_cms_2
     environment:
@@ -73,6 +74,7 @@ services:
       - 8080:1337
     volumes:
       - ./cms:/srv/cms
+      - ./cms/srv:/srv/app
 
   postgres:
     container_name: postgres_db_2
@@ -83,7 +85,7 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME} #optional (specify default database instead of $POSTGRES_USER)
     ports:
-      - "5433:5433"
+      - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 

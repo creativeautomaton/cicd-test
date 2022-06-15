@@ -10,7 +10,7 @@ env:
   #SSH deploy to server action env
   SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-  REMOTE_USER: ${{ secrets.REMOTE_USER }}  
+  REMOTE_USER: ${{ secrets.REMOTE_USER }}
 
 on:
   push:
@@ -68,4 +68,5 @@ jobs:
             cd cicd-test
             git pull
             openssl enc -d -aes256 -in env.vault -out .env -k ${{ secrets.ENV_VAULT_PASSWORD }}
-            docker compose up -d
+            docker compose down
+            docker compose up -d --build --remove-orphans

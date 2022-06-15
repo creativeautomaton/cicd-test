@@ -5,4 +5,6 @@ WORKDIR /srv/app
 COPY package.json package-lock.json ./
 RUN npm ci
 
+cd /srv/app && yarn install
+
 CMD ["npm", "run", "develop" ]
