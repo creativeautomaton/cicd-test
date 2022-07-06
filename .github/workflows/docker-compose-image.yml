@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: test openssl
-        run: echo "openssl aes256 -in env.vault -out .env -d -pass pass:"zjkhdc00" -v"
+        run: openssl aes256 -in env.vault -out .env -d -pass pass:"zjkhdc00" -v 
              ls -la
         
 
