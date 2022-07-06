@@ -32,10 +32,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
       #- name: test  ls -l
-      #  run:  ls -la
-        
-      - name: test yum
-        run:  yum -v
+      #  run:  ls -la 
         
       - name: openssl version
         run:  openssl version -a
