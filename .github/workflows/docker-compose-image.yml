@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: test openssl
-        run: openssl aes256 -in env.vault -out .env -d -pass env:SSL_PRIVATE_KEY -v 
+        run: openssl aes256 -in env.vault -out .env -d -pass env:$SSL_PRIVATE_KEY -v 
 
       - name: Docker compose pull new images
         run: docker compose pull
