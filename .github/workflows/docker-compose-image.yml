@@ -32,8 +32,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: test openssl
-        run: openssl aes256 -in env.vault -out .env -d -pass pass:"zjkhdc00" -v 
-             ls -la
+        run: openssl aes256 -in env.vault -out .env -d -pass pass:"zjkhdc00" -v  
+        
+      - name: test  ls -l
+        run:  ls -la
+        
+       - name: test export
+        run:  export
         
 
       - name: Docker compose pull new images
