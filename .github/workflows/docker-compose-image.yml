@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: test openssh
-        run: pwd
+        run: openssl -v
 
       - name: Docker compose pull new images
         run: docker compose pull
