@@ -37,10 +37,9 @@ jobs:
       - name: test  ls -l
         run:  ls -la
         
-       - name: test export
+      - name: test export
         run:  export
-        
-
+         
       - name: Docker compose pull new images
         run: docker compose pull
 
