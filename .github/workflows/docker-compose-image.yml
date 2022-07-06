@@ -8,7 +8,7 @@ env:
   #DOCKER_HOST: ssh://root:${{ secrets.DOCKER_HOST_PASSWORD}}@168.235.69.236
 
   #SSH deploy to server action env
-  SSL_PRIVATE_KEY: ${{ ENV_VAULT_PASSWORD }}
+  SSL_PRIVATE_KEY: ${{ secrets.ENV_VAULT_PASSWORD }}
   SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
   REMOTE_USER: ${{ secrets.REMOTE_USER }}
