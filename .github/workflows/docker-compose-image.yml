@@ -8,6 +8,7 @@ env:
   #DOCKER_HOST: ssh://root:${{ secrets.DOCKER_HOST_PASSWORD}}@168.235.69.236
 
   #SSH deploy to server action env
+  SSL_PRIVATE_KEY: ${{ ENV_VAULT_PASSWORD }}
   SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
   REMOTE_USER: ${{ secrets.REMOTE_USER }}
@@ -31,7 +32,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: test openssl
-        run: openssl enc -d -aes256 -in env.vault -out .env -k ${{ secrets.ENV_VAULT_PASSWORD }}
+        run: openssl enc -d -aes-256-cbc -in env.vault -out .env -k ${{ secrets.ENV_VAULT_PASSWORD }}
 
       - name: Docker compose pull new images
         run: docker compose pull
