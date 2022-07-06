@@ -33,6 +33,8 @@ jobs:
 
       - name: test openssl
         run: echo "openssl aes256 -in env.vault -out .env -d -pass pass:"zjkhdc00" -v"
+             ls -la
+        
 
       - name: Docker compose pull new images
         run: docker compose pull
