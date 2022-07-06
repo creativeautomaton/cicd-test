@@ -1,6 +1,9 @@
 
 #how to restore .env secrets in git repo
 
+#Create a .pem secret key or .key
+openssl rsa -in secret.key -pubout > secret.key
+
 #encrypt your local .env file
 openssl aes-256-cbc -in .env -out env.vault -pass file:secret.key
 

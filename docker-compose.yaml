@@ -1,7 +1,6 @@
 services:
   postgres_db:
-    container_name: postgres
-    # image: postgres:latest
+    container_name: postgres 
     image: postgres:alpine
     volumes:
       - ./data/db:/var/lib/postgresql/data
@@ -16,10 +15,9 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:latest
-    # build: ./pgadmin
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW} 
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
     ports:
       - "5050:80"
     restart: always
@@ -31,11 +29,10 @@ services:
     build: ./django
     restart: always
     command: bash -c "python manage.py runserver 0.0.0.0:80 "
-    # command: bash -c "python manage.py makemigrations --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:80"
     ports:
       - '8000:80'
-    environment:
-      - DATABASE_URL=postgres://postgres:changeit@postgres:5432/db
+    # environment:
+    #   - DATABASE_URL=postgres://postgres:changeit@postgres:5432/db
     env_file: .env
     depends_on:
       - postgres_db
@@ -47,18 +44,12 @@ services:
     build: ./svelte
     volumes:
       - ./svelte:/usr/src/app
-      # - ./svelte/nginx.conf:/tmp/nginx.conf
       - /usr/src/app/node_modules
       # - "~/.gitconfig:/etc/gitconfig"
     container_name: svelte-dev
     restart: on-failure
-    # stdin_open: true
-    # tty: true
     depends_on:
       - django
-    # networks:
-    #   - front-tier
-    #   - back-tier
     ports:
       - "3000:3000"
     command: "npm run dev"
