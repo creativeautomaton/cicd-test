@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
       - name: test   gpg
-        run: gpg -v
+        run: gpg -h
         
       - name: openssl version
         run:  openssl version -a
