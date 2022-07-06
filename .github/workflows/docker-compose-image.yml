@@ -48,25 +48,25 @@ jobs:
       # - name: Dockerhub push
       #  run: docker compose push
 
-  deploy:
-    needs: test-docker
-    runs-on: ubuntu-latest
-    steps:
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.REMOTE_PASSWORD }}
-          #key: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
-          #port: ${{ secrets.PORT }}
-          script: |
-            whoami
-            cd ../cdek/deploy
-            pwd
-            # git clone git@github.com:creativeautomaton/cicd-test.git
-            cd cicd-test
-            git pull
-            openssl enc -d -aes256 -in env.vault -out .env -k ${{ secrets.ENV_VAULT_PASSWORD }}
-            docker compose down
-            docker compose up -d --build --remove-orphans
+  # deploy:
+  #   needs: test-docker
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: executing remote ssh commands using password
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.REMOTE_HOST }}
+  #         username: ${{ secrets.REMOTE_USER }}
+  #         password: ${{ secrets.REMOTE_PASSWORD }}
+  #         #key: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
+  #         #port: ${{ secrets.PORT }}
+  #         script: |
+  #           whoami
+  #           cd ../cdek/deploy
+  #           pwd
+  #           # git clone git@github.com:creativeautomaton/cicd-test.git
+  #           cd cicd-test
+  #           git pull
+  #           openssl enc -d -aes256 -in env.vault -out .env -k ${{ secrets.ENV_VAULT_PASSWORD }}
+  #           docker compose down
+  #           docker compose up -d --build --remove-orphans

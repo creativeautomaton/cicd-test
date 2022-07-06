@@ -1,13 +1,17 @@
 .DS_Store
 node_modules
 /build
+/data/
 /.svelte-kit
 /package
 .env
-.env.*
+#.env.*
 !.env.example
+.env2
 .vercel
 .output
+
+./Docker_images
 
 ############################
 # OS X

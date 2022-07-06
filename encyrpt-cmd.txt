@@ -1,0 +1,19 @@
+
+#how to restore .env secrets in git repo
+
+#encrypt your local .env file
+openssl aes-256-cbc -in .env -out env.vault -pass file:secret.key
+
+#save key file to decrypt later
+secret.key
+
+#open secret.key file and copy key to remote github secrets
+#or other keystore location
+
+# add file names to .gitignore
+.env
+secret.key
+
+# decrypt env.vault file
+# be sure to download the secret.key file
+openssl aes-256-cbc -d -in secretfile.txt.enc -out secretfile.txt -pass file:secret.key
