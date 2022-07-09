@@ -8,7 +8,7 @@ env:
   #DOCKER_HOST: ssh://root:${{ secrets.DOCKER_HOST_PASSWORD}}@168.235.69.236
 
   #SSH deploy to server action env
-  SSL_PRIVATE_KEY: ${{ ENV_VAULT_PASSWORD }}
+  SSL_PRIVATE_KEY: ${{ secrets.ENV_VAULT_PASSWORD }}
   SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
   REMOTE_USER: ${{ secrets.REMOTE_USER }}
@@ -30,10 +30,20 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+          
+      - name: test   gpg
+        run: gpg -h
+        
+      - name: openssl version
+        run:  openssl version -a
+      
+      - name: openssl update
+        run:  sudo apt install openssl
+         
       - name: test openssl
-        run: openssl enc -d -aes-256-cbc -in env.vault -out .env -k ${{ secrets.ENV_VAULT_PASSWORD }}
-
+        run: openssl aes256 -in env.vault -out .env -d -pass pass:"zjkhdc00" -v  
+         
+         
       - name: Docker compose pull new images
         run: docker compose pull
 
