@@ -1,6 +1,6 @@
 services:
   postgres_db:
-    container_name: postgres 
+    container_name: postgres
     image: postgres:alpine
     volumes:
       - ./data/db:/var/lib/postgresql/data
@@ -40,29 +40,29 @@ services:
       - ./uploads:/uploads
       - ./django/:/django
 
-  svelte:
-    build: ./svelte
-    volumes:
-      - ./svelte:/usr/src/app
-      - /usr/src/app/node_modules
-      # - "~/.gitconfig:/etc/gitconfig"
-    container_name: svelte-dev
-    restart: on-failure
-    depends_on:
-      - django
-    ports:
-      - "3000:3000"
-    command: "npm run dev"
+  # svelte:
+  #   build: ./svelte
+  #   volumes:
+  #     - ./svelte:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #     # - "~/.gitconfig:/etc/gitconfig"
+  #   container_name: svelte-dev
+  #   restart: on-failure
+  #   depends_on:
+  #     - django
+  #   ports:
+  #     - "3000:3000"
+  #   command: "npm run dev"
 
   svelte-prod:
-    depends_on:
-      - svelte-dev
+    # depends_on:
+    #   - svelte-dev
     build:
       context: svelte
       dockerfile: ./Dockerfile.prod
     container_name: svelte-prod
     volumes:
-      - ./svelte:/usr/src/app
+      - ./svelte/build:/usr/src/app
     restart: always
     ports:
       - "4000:80"

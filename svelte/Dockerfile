@@ -7,6 +7,8 @@ COPY . .
 #CMD ["npm", "run", "test"]
 #CMD ["npm", "run", "prepare"]
 #CMD ["npm", "run", "dev"]
-#RUN npm run build
+RUN npm run build
+
+
 #CMD ["npm", "run", "preview"]
 #CMD ["npm", "run", "package"]
