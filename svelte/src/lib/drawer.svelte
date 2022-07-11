@@ -27,7 +27,7 @@
   <!-- Don't include fixed={false} if this is a page wide drawer.
         It adds a style for absolute positioning. -->
   <Drawer variant="modal" bind:open>
-    <Header>
+    <Header align="end">
       <Button on:click={() => (open = !open)}>
         close <IconButton class="material-icons">close</IconButton>
       </Button>
@@ -57,7 +57,7 @@
     display: flex;
     height: auto;
     overflow: hidden;
-    z-index: 0;
+    /* z-index: 0; */
   }
 
   * :global(.app-content) {

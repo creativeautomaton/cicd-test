@@ -1,6 +1,7 @@
 <script lang="ts">
   import NavDrawer from "$lib/drawer.svelte";
   import Footer from "$lib/footer.svelte";
+  let nav_menu = ["Home", "About", "Research", "Contact"];
 </script>
 
 <!-- Holds the topbar, and drawer navigation -->

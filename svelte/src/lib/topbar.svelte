@@ -9,6 +9,8 @@
   import IconButton from "@smui/icon-button";
   import Button, { Label } from "@smui/button";
 
+  import NavBanner from "$lib/nav-banner.svelte";
+
   let topAppBar: TopAppBarComponentDev;
 
   import { createEventDispatcher } from "svelte";
@@ -24,21 +26,15 @@
       <Button on:click={toggleMenu}>
         <IconButton class="material-icons">menu</IconButton>
       </Button>
-
       <Title>CRIB - Center for Research Innovation in Biotechnology</Title>
     </Section>
     <Section align="end" toolbar>
       <IconButton class="material-icons" aria-label="Download"
-        >file_download</IconButton
-      >
-      <IconButton class="material-icons" aria-label="Print this page"
-        >print</IconButton
-      >
-      <IconButton class="material-icons" aria-label="Bookmark this page"
-        >bookmark</IconButton
+        >account_circle</IconButton
       >
     </Section>
   </Row>
+  <NavBanner />
 </TopAppBar>
 
 <style>

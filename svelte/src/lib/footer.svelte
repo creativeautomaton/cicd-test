@@ -2,7 +2,6 @@
   import Banner from "$lib/banner.svelte";
   import LogoHero from "$lib/logo-hero.svelte";
   import IconButton from "@smui/icon-button";
-  import NavDrawer from "$lib/drawer.svelte";
   import Button, { Label } from "@smui/button";
   import List, { Item, Text, Graphic, Separator, Subheader } from "@smui/list";
   import { H6 } from "@smui/common/elements";
@@ -11,6 +10,13 @@
   import FormField from "@smui/form-field";
   // import TopAppBar, { Row, Section, Title } from "@smui/top-app-bar";
   // import NavMenu from "$lib/nav-menu.svelte";
+
+  let nav_menu = [
+    { slug: "home", title: "Home" },
+    { slug: "about", title: "About" },
+    { slug: "research", title: "Research" },
+    { slug: "contact", title: "Contact" },
+  ];
 
   export let active = "Home";
 
@@ -21,57 +27,41 @@
 
 <div class="footer-container">
   <LayoutGrid>
-    <Cell span={3}>
-      <h1>Menu</h1>
+    <Cell span={4}>
+      <h3 class="mdc-typography--headline1">Menu</h3>
       <List dense>
-        <Item
-          href="/"
-          on:click={() => setActive("Home")}
-          activated={active === "Home"}
-        >
-          <Text>Home</Text>
-        </Item>
-        <Item
-          href="/about"
-          on:click={() => setActive("About")}
-          activated={active === "About"}
-        >
-          <Text>About CRIB</Text>
-        </Item>
-        <Item
-          href="/research"
-          on:click={() => setActive("Research")}
-          activated={active === "Research"}
-        >
-          <Text>Research</Text>
-        </Item>
-        <Item
-          href="/contact"
-          on:click={() => setActive("Contact")}
-          activated={active === "Contact"}
-        >
-          <Text>Contact</Text>
-        </Item>
-
-        <Separator />
-        <Subheader component={H6}>Labels</Subheader>
-        <Item
-          href="javascript:void(0)"
-          on:click={() => setActive("Family")}
-          activated={active === "Family"}
-        >
-          <Text>Family</Text>
-        </Item>
+        {#each nav_menu as todo}
+          {#if todo.title === "Home"}
+            <Item
+              href="/"
+              on:click={() => setActive(todo.title)}
+              activated={active === todo.title}
+            >
+              <a href="/">
+                <Text>{todo.title}</Text>
+              </a>
+            </Item>
+          {:else}
+            <Item
+              on:click={() => setActive(todo.title)}
+              activated={active === todo.title}
+            >
+              <a href="/{todo.slug}">
+                <Text>{todo.title}</Text>
+              </a>
+            </Item>
+          {/if}
+        {/each}
       </List>
     </Cell>
-    <Cell span={3}>
-      <h1>About</h1>
+    <Cell span={4}>
+      <h3>About</h3>
     </Cell>
-    <Cell span={3}>
-      <h1>Research</h1>
+    <Cell span={4}>
+      <h3>Research</h3>
     </Cell>
-    <Cell span={3}>
-      <h1>Contact</h1>
+    <Cell span={4}>
+      <h3>Contact</h3>
     </Cell>
   </LayoutGrid>
 </div>
@@ -85,7 +75,7 @@
     justify-content: center;
     align-items: center;
     min-height: 300px;
-    background-color: #333;
+    background-color: var(--mdc-theme-primary, #333);
     color: #fff;
   }
 </style>
