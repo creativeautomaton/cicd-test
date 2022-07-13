@@ -19,8 +19,8 @@
     active = value;
     open = false;
   }
-  import Topbar from "$lib/topbar.svelte";
-  import NavMenu from "$lib/nav-menu.svelte";
+  import Topbar from "$lib/header/topbar.svelte";
+  import NavMenu from "$lib/header/nav-menu.svelte";
 </script>
 
 <div class="drawer-container">
@@ -31,8 +31,8 @@
       <Button on:click={() => (open = !open)}>
         close <IconButton class="material-icons">close</IconButton>
       </Button>
-      <Title>Super Mail</Title>
-      <Subtitle>It's the best fake mail app drawer.</Subtitle>
+      <Title>CRIB</Title>
+      <Subtitle>Center for Research Innovation in Biotechnology</Subtitle>
     </Header>
     <Content>
       <NavMenu on:message={() => (open = !open)} />

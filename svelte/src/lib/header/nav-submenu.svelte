@@ -58,7 +58,7 @@
     height: 320px;
     border: 1px solid
       var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.1));
-    margin: 0 18px 18px 0;
+    margin: 0 6px 6px 0;
     background-color: var(--mdc-theme-background, #fff);
     overflow: auto;
     display: inline-block;

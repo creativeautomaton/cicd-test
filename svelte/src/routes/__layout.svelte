@@ -1,7 +1,16 @@
 <script lang="ts">
-  import NavDrawer from "$lib/drawer.svelte";
-  import Footer from "$lib/footer.svelte";
+  import NavDrawer from "$lib/header/drawer.svelte";
+  import Footer from "$lib/footer/footer.svelte";
   let nav_menu = ["Home", "About", "Research", "Contact"];
+
+  let scrollAction = 400;
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+  function headerShow() {
+    alert("test");
+    // dispatch("message");
+  }
+  // console.log(scrollAction);
 </script>
 
 <!-- Holds the topbar, and drawer navigation -->

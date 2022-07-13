@@ -1,63 +1,62 @@
+// MDC color Classes
 @use 'sass:color';
 @use '@material/theme/color-palette';
-// @use '@material/typography/mdc-typography';
-// MDC Elevation Classes
-// @use '@material/elevation/mdc-elevation';
 
-// Color monochrom from adobe kulor/color
-// blue-grey: #2F5169;
-// light-blue: #B2D4ED;
-// base: #69B3E7;
-// dark-grey: #4E5E69;
-// medium-blue: #518CB5;
+// CRIB colors
+$blue-grey: #2F5169;
+$light-blue: #B2D4ED;
+$base: #69B3E7;
+$dark-grey: #4E5E69;
+$medium-blue: #518CB5;
+$error: #b71c1c;
+$background: #fff;
 
-
-
-// Svelte Colors!
-@use '@material/theme/index' as theme with (
-  $primary: #4E5E69,
-  $secondary: #69B3E7,
-  $surface: #B2D4ED,
-  $background: #fff,
-  $error: color-palette.$red-900
-  // $on-error,
-  // $on-primary,
-  // $on-secondary,
-  // $on-surface,
-  // contrast,
-  // contrast-tone,
-  // luminance,
-  // text-emphasis,
-  // tone;
+@use '@material/theme' as theme with (
+  $primary: $base,
+  $on-primary: #442b2d,
+  $secondary: $blue-grey,
+  $on-secondary: #fff,
+  $surface: #fff,
+  $on-surface: #442b2d,
+  $background: $background,
+  $error: $error
 );
+
+// MDC typography Classes
+@use '@material/typography/mdc-typography';
+
+// MDC Elevation Classes
+@use "@material/elevation/mdc-elevation";
+// MDC Button Classes
+@use "@material/button/mdc-button";
+
 /* Theme colors. */
 :root {
-  --mdc-theme-primary: #4E5E69;
-  --mdc-theme-secondary: #69B3E7;
-  --mdc-theme-background: #B2D4ED;
+  --mdc-theme-primary:  #{$base};
+  --mdc-theme-secondary: #{$dark-grey};
+  --mdc-theme-background: #fff;
   --mdc-theme-surface: #fff;
-  --mdc-theme-error: #b71c1c;
-  --mdc-theme-on-primary: #fff;
-  --mdc-theme-on-secondary: #fff;
-  --mdc-theme-on-surface: #000;
-  --mdc-theme-on-error: #fff;
-  --mdc-theme-text-primary-on-background: rgba(0, 0, 0, 0.87);
-  --mdc-theme-text-secondary-on-background: rgba(0, 0, 0, 0.54);
-  --mdc-theme-text-hint-on-background: rgba(0, 0, 0, 0.38);
-  --mdc-theme-text-disabled-on-background: rgba(0, 0, 0, 0.38);
-  --mdc-theme-text-icon-on-background: rgba(0, 0, 0, 0.38);
-  --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);
-  --mdc-theme-text-secondary-on-light: rgba(0, 0, 0, 0.54);
-  --mdc-theme-text-hint-on-light: rgba(0, 0, 0, 0.38);
-  --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.38);
-  --mdc-theme-text-icon-on-light: rgba(0, 0, 0, 0.38);
-  --mdc-theme-text-primary-on-dark: white;
-  --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
-  --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
-  --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
-  --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);
+  --mdc-theme-error: #{$error};
+  // --mdc-theme-on-primary: #fff;
+  // --mdc-theme-on-secondary: #fff;
+  // --mdc-theme-on-surface: #{$dark-grey};
+  // --mdc-theme-on-error: #fff;
+  // --mdc-theme-text-primary-on-background: rgba(0, 0, 0, 0.87);
+  // --mdc-theme-text-secondary-on-background: rgba(0, 0, 0, 0.54);
+  // --mdc-theme-text-hint-on-background: rgba(0, 0, 0, 0.38);
+  // --mdc-theme-text-disabled-on-background: rgba(0, 0, 0, 0.38);
+  // --mdc-theme-text-icon-on-background: rgba(0, 0, 0, 0.38);
+  // --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);
+  // --mdc-theme-text-secondary-on-light: rgba(0, 0, 0, 0.54);
+  // --mdc-theme-text-hint-on-light: rgba(0, 0, 0, 0.38);
+  // --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.38);
+  // --mdc-theme-text-icon-on-light: rgba(0, 0, 0, 0.38);
+  // --mdc-theme-text-primary-on-dark: white;
+  // --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
+  // --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
+  // --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
+  // --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);
 }
-
 /* Layout grid spacing. */
 :root {
   --mdc-layout-grid-margin-desktop: 24px;
@@ -71,15 +70,31 @@
   --mdc-layout-grid-column-width-phone: 72px;
 }
 
-.brand-color{
-  background-color: var(--mdc-theme-primary, #333);
-}
+// typography
+.headline{ font-size: 8em; line-height: 0em; }
+.subheading{ font-size: 2em; line-height: 0em;}
+
+.thin{ font-family: 'Roboto', sans-serif; font-weight: 100;}
+.regular{ font-family: 'Roboto', sans-serif; font-weight: 300;}
+.bold{ font-family: 'Roboto', sans-serif; font-weight: 600;}
+.mono{ font-family: 'Roboto+Mono', sans-serif; }
+
+.light{color: #fff;}
+.dark{ color: #000;}
+
+// utilities
+.left{ text-align: left;}
+.center{ text-align: center;}
+.right{ text-align: right;}
+.pull-left{float: left;}
+.pull-right{float: right;}
 
 html,
 body {
-  background-color: theme.$surface;
-  color: theme.$on-surface;
+  // background-color: theme.$surface;
+  // color: theme.$on-surface;
   margin: 0;
+  font-family: Roboto;
 }
 
 a {
@@ -89,8 +104,24 @@ a {
 a:visited {
   color: color.scale(#40b3ff, $lightness: -35%);
 }
+.transparent{
+  background: transparent !important;
+  background-color: transparent !important;
+}
+.hidden{
+  display: none !important;
+}
 
 // custom css
+.container {
+  position: relative;
+}
+.brand-color{
+  background-color: $base
+}
 .mdc-top-app-bar--fixed-adjust {
   padding-top: 4px;
+}
+.mdc-top-app-bar--dense .mdc-top-app-bar__row {
+  height: 36px;
 }

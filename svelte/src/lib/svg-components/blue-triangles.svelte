@@ -18,12 +18,14 @@
 
     background-attachment: fixed;
     background-size: cover;
-    height: 100vh !important;
+    height: 80vh !important;
+    min-height: 600px;
+    max-height: 600px;
     display: block;
     position: absolute;
     width: 100vw;
     padding: 0;
-    margin: -15em 0;
+    margin: 0em 0;
     z-index: 0;
   }
 </style>
