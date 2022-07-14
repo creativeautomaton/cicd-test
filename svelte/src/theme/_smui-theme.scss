@@ -79,8 +79,8 @@ $background: #fff;
 .bold{ font-family: 'Roboto', sans-serif; font-weight: 600;}
 .mono{ font-family: 'Roboto+Mono', sans-serif; }
 
-.light{color: #fff;}
-.dark{ color: #000;}
+.light{color: #fff !important;}
+.dark{ color: #000!important; }
 
 // utilities
 .left{ text-align: left;}
@@ -94,10 +94,15 @@ $background: #fff;
   .mobile {   display: block; }
   .desktop { display: none; }
 }
+@media (min-width: 600px) and (max-width: 839px) {
+  .mobile {   display: none; }
+  .desktop {   display: block; }
+}
 @media (min-width: 600px) {
   .mobile {   display: none; }
   .desktop {   display: block; }
 }
+
 
 html,
 body {

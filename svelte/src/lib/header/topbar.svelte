@@ -30,8 +30,8 @@
   // let visible = true;
 </script>
 
-<div transition:fly={{ y: 200, duration: 200 }} class="hid den">
-  <TopAppBar bind:this={topAppBar} variant="standard" color="secondary">
+<div transition:fly={{ y: 200, duration: 0 }} class="hid den">
+  <TopAppBar bind:this={topAppBar} variant="fixed" color="secondary">
     <BrandBanner />
     <Row>
       <Section>

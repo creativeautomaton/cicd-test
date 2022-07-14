@@ -1,12 +1,12 @@
 <script lang="ts">
 </script>
 
-<div class="design-holder">
+<div class="svg-holder">
   <span class="blue-swoop" />
 </div>
 
 <style>
-  .design-holder {
+  .svg-holder {
     position: absolute;
     width: var(--width, "3em");
   }

@@ -24,8 +24,7 @@
   // let visible;
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
-  function headerShow(visible) {
-    // console.log(visible);
+  function toggleMenu() {
     dispatch("message");
   }
 </script>
@@ -40,7 +39,7 @@
 <ScrollActions let:visible>
   <!-- <BlueTriangles /> -->
   {#if !visible}
-    <div transition:fly={{ y: -500, duration: 1000 }}>
+    <div transition:fly={{ y: -500, duration: 400 }}>
       <BlueSwoop />
     </div>
   {/if}
@@ -49,20 +48,40 @@
   {#if visible}
     <div
       transition:fly={{ y: 0, duration: 0 }}
-      style="display: block; height: 300px; width: 100%;"
+      style="display: block; height: 200px; width: 100%;"
     />
   {/if}
 </ScrollActions>
-<div class="container ">
+<div class="container">
+  <LayoutGrid>
+    <ScrollActions let:visible>
+      {#if !visible}
+        <Cell span={12} class="right">
+          <Button class="light" on:click={toggleMenu}>
+            Menu
+            <IconButton class="material-icons">menu</IconButton>
+          </Button>
+          <div class="mobile">
+            <Button class="light" on:click={toggleMenu}>
+              <PillLogo --width="3em" />
+            </Button>
+          </div>
+          <IconButton class="material-icons light" aria-label="Download"
+            >account_circle</IconButton
+          >
+        </Cell>
+      {/if}
+    </ScrollActions>
+  </LayoutGrid>
   <LayoutGrid>
     <Cell span={5}>
       <ScrollActions let:visible>
         {#if !visible}
           <div
-            class="demo-cell pill-logo-container"
-            transition:fly={{ x: -500, duration: 1000 }}
+            class="pill-logo-container desktop"
+            transition:fly={{ x: -500, duration: 500 }}
           >
-            <PillLogo --width="100%" class="pill-logo-container" />
+            <PillLogo2 --width="20em" />
           </div>
         {/if}
       </ScrollActions>
@@ -71,7 +90,7 @@
       <div class="demo-cell">
         <ScrollActions let:visible>
           {#if !visible}
-            <div transition:fly={{ x: 500, duration: 1000 }}>
+            <div transition:fly={{ x: 500, duration: 500 }}>
               <h1 class="bold headline light">CRIB</h1>
               <p class="lead light">
                 Center for Research Innovation in Biotechnology (<strong
@@ -113,25 +132,6 @@
   </LayoutGrid>
   <div id="scroll-down" style="display: block; height: 150px; width: 100%;" />
 </div>
-<!-- <ScrollActions let:visible>
-  {#if !visible}
-    <div transition:fly={{ y: 500, duration: 1000 }}>
-      <LayoutGrid>
-        <Cell span={12} class="center">
-          <Button
-            href="#scroll-down"
-            variant="raised"
-            class="mdc-elevation--z12"
-            color="primary"
-          >
-            <Label>See More</Label>
-            <IconButton class="material-icons">south</IconButton>
-          </Button>
-        </Cell>
-      </LayoutGrid>
-    </div>
-  {/if}
-</ScrollActions> -->
 
 <!-- split layout -->
 <LayoutGrid class="center">
@@ -209,7 +209,12 @@
   }
   @media (min-width: 600px) and (max-width: 839px) {
     .pill-logo-container {
-      max-width: 100px;
+      max-width: 200px;
+    }
+  }
+  @media (min-width: 839px) {
+    .pill-logo-container {
+      max-width: 400px;
     }
   }
 </style>
