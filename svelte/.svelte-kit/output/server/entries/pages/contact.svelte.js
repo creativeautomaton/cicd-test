@@ -1,118 +1,44 @@
-import { c as create_ssr_component, v as validate_component } from "../../chunks/index-5d194541.js";
-import { D as Drawer_1 } from "../../chunks/drawer-da496e50.js";
+import { c as create_ssr_component, v as validate_component } from "../../chunks/index-4b7b92f5.js";
+import { D as Drawer_1, T as Topbar } from "../../chunks/drawer-6761d044.js";
 import "@material/icon-button";
 import "@material/ripple";
 import "@material/dom";
 import "@material/list";
-import "../../chunks/drawer.svelte_svelte_type_style_lang-d9b42fa3.js";
-import { L as LayoutGrid, C as Cell } from "../../chunks/index-f419de0a.js";
-import "@material/drawer";
+import { L as LayoutGrid, C as Cell } from "../../chunks/pill-logo.svelte_svelte_type_style_lang-e6f75325.js";
 import "@material/top-app-bar";
 import "@material/checkbox";
 import "@material/form-field";
+import "@material/drawer";
 const Contact = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${validate_component(Drawer_1, "NavDrawer").$$render($$result, {}, {}, {})}
-
-<h1>Contact Us</h1>
-
-
-${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, { class: " center" }, {}, {
-    default: () => {
-      return `${validate_component(Cell, "Cell").$$render($$result, {
-        span: 6,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<div><h1>Welcome to SvelteKit</h1></div>`;
-        }
-      })}
-  ${validate_component(Cell, "Cell").$$render($$result, {
-        span: 6,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
-    </p>`;
-        }
-      })}`;
-    }
-  })}
+  let open;
+  let $$settled;
+  let $$rendered;
+  do {
+    $$settled = true;
+    $$rendered = `${validate_component(Drawer_1, "NavDrawer").$$render($$result, { open }, {
+      open: ($$value) => {
+        open = $$value;
+        $$settled = false;
+      }
+    }, {})}
+${validate_component(Topbar, "Topbar").$$render($$result, {}, {}, {})}
 
 
-${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, { class: "center" }, {}, {
-    default: () => {
-      return `${validate_component(Cell, "Cell").$$render($$result, {
-        span: 4,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<div><h1>Welcome to SvelteKit</h1></div>`;
-        }
-      })}
-  ${validate_component(Cell, "Cell").$$render($$result, {
-        span: 4,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<div><img src="${"https://placeholder.pics/svg/100vwx100vh/DEDEDE/555555/test"}"></div>`;
-        }
-      })}
-  ${validate_component(Cell, "Cell").$$render($$result, {
-        span: 4,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
-    </p>`;
-        }
-      })}`;
-    }
-  })}
-
-
-${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, { class: "center" }, {}, {
-    default: () => {
-      return `${validate_component(Cell, "Cell").$$render($$result, {
-        span: 4,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<div><h1>Welcome to SvelteKit</h1></div>`;
-        }
-      })}
-  ${validate_component(Cell, "Cell").$$render($$result, {
-        span: 8,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
-    </p>`;
-        }
-      })}`;
-    }
-  })}
-
-
-${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, { class: "center" }, {}, {
-    default: () => {
-      return `${validate_component(Cell, "Cell").$$render($$result, {
-        span: 8,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<div><h1>Welcome to SvelteKit</h1></div>`;
-        }
-      })}
-  ${validate_component(Cell, "Cell").$$render($$result, {
-        span: 4,
-        class: "cell rounded mdc-elevation--z1 center"
-      }, {}, {
-        default: () => {
-          return `<p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
-    </p>`;
-        }
-      })}`;
-    }
-  })}`;
+${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, {}, {}, {
+      default: () => {
+        return `${validate_component(Cell, "Cell").$$render($$result, { span: 12, class: "cell left" }, {}, {
+          default: () => {
+            return `<div><h1 class="${"thin uppercase"}">Contact</h1></div>`;
+          }
+        })}
+  ${validate_component(Cell, "Cell").$$render($$result, { span: 12, class: "cell  center" }, {}, {
+          default: () => {
+            return `<p></p>`;
+          }
+        })}`;
+      }
+    })}`;
+  } while (!$$settled);
+  return $$rendered;
 });
 export { Contact as default };

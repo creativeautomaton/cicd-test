@@ -119,29 +119,43 @@ $background: #fff;
 .dark {
   color: #000 !important;
 }
-.blue-grey{color: #2f5169};
-.light-blue{color: #b2d4ed};
-.brand-color{color: #69b3e7};
-.dark-grey{color: #4e5e69};
-.medium-blue{color: #518cb5};
-.error{color: #b71c1c};
-.background{color: #fff};
+// CRIB color classes
+.blue-grey{color:  $blue-grey};
+.light-blue{color:  $light-blue};
+.brand-color{color:  $base};
+.dark-grey{color:  $dark-grey};
+.medium-blue{color:  $medium-blue};
+.error{color:  $error};
+.background{color:  $background};
 
 // utilities
 .left {
-  text-align: left;
+  text-align: left !important;
+  justify-content: start !important;
 }
 .center {
-  text-align: center;
+  text-align: center !important;
+  justify-content: center !important;
 }
 .right {
-  text-align: right;
+  text-align: right !important;
+  justify-content: end !important;
+
 }
 .pull-left {
   float: left;
 }
 .pull-right {
   float: right;
+}
+.uppercase{
+  text-transform: uppercase !important;
+}
+.lowercase{
+  text-transform: lowercase !important;
+}
+.capitalize{
+  text-transform: capitalize !important;
 }
 
 // mobile
@@ -175,7 +189,7 @@ body {
   // background-color: theme.$surface;
   // color: theme.$on-surface;
   margin: 0;
-  font-family: Roboto;
+  font-family: "open Sans", sans-serif;
 }
 
 a {
@@ -197,6 +211,9 @@ a:visited {
 // custom css
 .container {
   position: relative;
+  max-width: 1200px;
+  margin: 0px auto;
+  
 }
 .brand-color {
   background-color: $base;

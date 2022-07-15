@@ -1,9 +1,9 @@
 export const manifest = {
-	appDir: "_appuyu",
-	assets: new Set(["favicon.png","smui-dark.css","smui.css"]),
-	mimeTypes: {".png":"image/png",".css":"text/css"},
+	appDir: "_app",
+	assets: new Set([".DS_Store","favicon.png","images/covid-data-bg.jpg","smui-dark.css","smui.css"]),
+	mimeTypes: {".png":"image/png",".jpg":"image/jpeg",".css":"text/css"},
 	_: {
-		entry: {"file":"start-83801326.js","imports":["start-83801326.js","chunks/index-e8fab05a.js","chunks/index-0d58b0fe.js"],"stylesheets":[]},
+		entry: {"file":"start-6517cb9e.js","imports":["start-6517cb9e.js","chunks/index-ec06594a.js","chunks/index-db7e7858.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),

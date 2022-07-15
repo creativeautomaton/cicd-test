@@ -4,6 +4,10 @@
   import NavDrawer from "$lib/header/drawer.svelte";
   import Topbar from "$lib/header/topbar.svelte";
   import NavMenu from "$lib/header/nav-menu.svelte";
+
+  // Background Components
+  import BackgroundImage from "$lib/svg-components/background-images.svelte";
+
   // custom svg components
   import BlueTriangles from "$lib/svg-components/blue-triangles.svelte";
   import BlueSwoop from "$lib/svg-components/blue-swoop.svelte";
@@ -23,6 +27,7 @@
   import List, { Item, Text, Graphic, Separator, Subheader } from "@smui/list";
   import { H6 } from "@smui/common/elements";
   import LayoutGrid, { Cell } from "@smui/layout-grid";
+  import Card, { Content } from "@smui/card";
 
   // let y;
   // let visible;
@@ -153,32 +158,55 @@
 </div>
 
 <!-- about section tri-layout -->
-<LayoutGrid class="center">
-  <Cell span={3} />
-  <Cell span={6} class="cell center">
-    <PillLogo --width="8em" />
-    <h1 class="thin">Powerful Insights of Clinical Trials Data</h1>
-    <p class="mono">
-      C.R.I.B. brings together expertise, skills & knowledge in the
-      Pharmacology, Data Science, Clinic Trials research sectors and provides
-      clean, collected, and updated data on FDA Approved Drugs, Pharmacology
-      Organizations, Drug pricing, and medical indications(MeSH).
-    </p>
-    <br />
-    <Button
-      color="secondary"
-      href="/about"
-      variant="outlined"
-      class=" rou snded"
-    >
-      <Label>About CRIB</Label>
-    </Button>
-    <br />
-    <br />
-  </Cell>
-  <Cell span={3} />
+<LayoutGrid class="center" style="margin: 5em 0em; overflow: hidden;">
+  <BackgroundImage
+    src="/images/covid-data-bg.jpg"
+    variant="fixed"
+    class="desktop"
+  />
   <Cell span={2} />
-  <Cell span={2} class="cell center">
+  <Cell span={6} class="cell center">
+    <Card variant="outlined" padded class="cell rounded mdc-elevation--z1">
+      <PillLogo --width="8em" />
+      <h1 class="thin">Powerful Insights of Clinical Trials Data</h1>
+      <p class="mono">
+        C.R.I.B. brings together expertise, skills & knowledge in the
+        Pharmacology, Data Science, Clinic Trials research sectors and provides
+        clean, collected, and updated data on FDA Approved Drugs, Pharmacology
+        Organizations, Drug pricing, and medical indications(MeSH).
+      </p>
+      <br />
+      <Button
+        color="secondary"
+        href="/about"
+        variant="outlined"
+        class=" rou snded"
+      >
+        <Label>Learn About CRIB</Label>
+      </Button>
+      <br />
+      <br />
+    </Card>
+  </Cell>
+
+  <br />
+  <br />
+  <br />
+  <br />
+  <p />
+</LayoutGrid>
+
+<LayoutGrid class="center">
+  <Cell span={12} class=" center">
+    <span class="dark-grey">
+      <IconButton class="material-icons " --font-size="8em"
+        >newspaper</IconButton
+      >
+    </span>
+    <br />
+    <h1 class="thin">Peer Revied Research into Clinical Trials</h1>
+  </Cell>
+  <Cell span={4} class="  center">
     <span class="medium-blue">
       <IconButton class="material-icons " --font-size="4em">
         compare_arrows
@@ -187,7 +215,7 @@
     <h3>Source Comparisions</h3>
     <p>Cleaning clinical trials data from multiple sources.</p>
   </Cell>
-  <Cell span={2} class="cell center">
+  <Cell span={4} class="cell center">
     <span class="medium-blue">
       <IconButton class="material-icons " --font-size="4em">done_all</IconButton
       >
@@ -195,7 +223,7 @@
     <h3>Data Correction</h3>
     <p>Programatic filtering, ML modeling, and hands-on Trial data.</p>
   </Cell>
-  <Cell span={2} class="cell center ">
+  <Cell span={4} class="cell center ">
     <span class="medium-blue">
       <IconButton class="material-icons" --font-size="4em">auto_mode</IconButton
       >
@@ -203,32 +231,97 @@
     <h3>Data Synchronization</h3>
     <p>Daily, Weekly, Yearly data source updates and review of Trial data</p>
   </Cell>
-  <Cell span={2} class="cell center primary">
+  <Cell span={4} class="cell center primary hidden">
     <span class="medium-blue">
       <IconButton class="material-icons" --font-size="4em">analytics</IconButton
       >
     </span>
-    <h3>Reviews and Vizualizations</h3>
-    <p>published research and interactive data experiences.</p>
+    <h3>Peer Reviewed</h3>
+    <p>Published research and interactive data vizualizations.</p>
   </Cell>
-  <Cell span={2} />
+  <Cell span={12}>
+    <br />
+    <Button
+      color="secondary"
+      href="/research"
+      variant="outlined"
+      class=" rou snded"
+    >
+      <Label>View Research Papers</Label>
+    </Button>
+    <br />
+    <br />
+  </Cell>
 </LayoutGrid>
 
-<!-- split layout -->
+<!-- split layout
 <LayoutGrid class="center">
-  <Cell span={6} class="cell rounded mdc-elevation--z1 center">
+  <Cell span={6} class="cell center">
     <div>
-      <h1>Welcome to SvelteKit</h1>
+      <h1
+        align=" middle"
+        class="bold "
+        style="font-size: 4em;text-transform: uppercase;"
+      >
+        Biologics Data
+      </h1>
+      <p>
+        Curated Medical and Business innovations in therapeutic Biologic
+        combination drugs.
+      </p>
     </div>
   </Cell>
-  <Cell span={6} class="cell rounded mdc-elevation--z1 center">
-    <p>
-      Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-    </p>
+  <Cell span={6} class="cell  center">
+    <img
+      height="600px"
+      width="100%"
+      src="https://images.pexels.com/photos/5726666/pexels-photo-5726666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    />
+  </Cell>
+  <Cell span={6} class="cell center">
+    <img
+      height="600px"
+      width="100%"
+      src="https://images.pexels.com/photos/5726666/pexels-photo-5726666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    />
+  </Cell>
+  <Cell span={6} class="cell  center">
+    <div>
+      <h1
+        align=" middle"
+        class="bold "
+        style="font-size: 4em;text-transform: uppercase;"
+      >
+        Pharmacology Startups
+      </h1>
+      <p>
+        Curated Business innovations in therapeutic clinical trials for
+        combination drugs.
+      </p>
+    </div>
+  </Cell>
+  <Cell span={6} class="cell center">
+    <div>
+      <h1
+        align=" middle"
+        class="bold "
+        style="font-size: 4em;text-transform: uppercase;"
+      >
+        Clinical Trial Trends
+      </h1>
+      <p>Curated Medical trial trends and historic data ineractions.</p>
+    </div>
+  </Cell>
+  <Cell span={6} class="cell  center">
+    <img
+      height="600px"
+      width="100%"
+      src="https://images.pexels.com/photos/5726666/pexels-photo-5726666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    />
   </Cell>
 </LayoutGrid>
-
-<!-- Tri-layout -->
+ -->
+<!-- Tri-layout
 <LayoutGrid class="center">
   <Cell span={4} class="cell rounded mdc-elevation--z1 center">
     <div>
@@ -271,8 +364,8 @@
     </IconButton>
   </Cell>
 </LayoutGrid>
-
-<!-- 1/3rds-layout -->
+-->
+<!-- 1/3rds-layout
 <LayoutGrid class="center">
   <Cell span={4} class="cell rounded mdc-elevation--z1 center">
     <div>
@@ -285,8 +378,9 @@
     </p>
   </Cell>
 </LayoutGrid>
+-->
 
-<!-- Reverse 1/3rds-layout -->
+<!-- Reverse 1/3rds-layout
 <LayoutGrid class="center">
   <Cell span={8} class="cell rounded mdc-elevation--z1 center">
     <div>
@@ -299,7 +393,7 @@
     </p>
   </Cell>
 </LayoutGrid>
-
+ -->
 <style>
   .cell {
     height: 60px;

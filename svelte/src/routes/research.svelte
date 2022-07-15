@@ -12,6 +12,17 @@
 <NavDrawer bind:open />
 <Topbar on:message={() => (open = !open)} />
 
-<h1>Research Papers</h1>
+<!-- Research Papers layout -->
+<LayoutGrid>
+  <Cell span={12} class="cell left">
+    <div>
+      <h1 class="thin uppercase">Research Papers</h1>
+    </div>
+  </Cell>
+  <Cell span={12} class="cell  center">
+    <p />
+  </Cell>
+</LayoutGrid>
 
-<p>CRIB papers</p>
+<style>
+</style>

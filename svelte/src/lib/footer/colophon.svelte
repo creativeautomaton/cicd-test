@@ -16,9 +16,7 @@
     >
     <Cell span={2} />
     <Cell span={5}>
-      <small>
-        Copyright ©2022 Long Island University · All rights reserved
-      </small>
+      <small> Copyright ©2022 -  All rights reserved. </small>
     </Cell>
     <!-- <Cell span={2} /> -->
   </LayoutGrid>

@@ -12,6 +12,13 @@ function run_all(fns) {
 function safe_not_equal(a, b) {
   return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
 }
+function subscribe(store, ...callbacks) {
+  if (store == null) {
+    return noop;
+  }
+  const unsub = store.subscribe(...callbacks);
+  return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+}
 function compute_rest_props(props, keys) {
   const rest = {};
   keys = new Set(keys);
@@ -19,6 +26,17 @@ function compute_rest_props(props, keys) {
     if (!keys.has(k) && k[0] !== "$")
       rest[k] = props[k];
   return rest;
+}
+function compute_slots(slots) {
+  const result = {};
+  for (const key in slots) {
+    result[key] = true;
+  }
+  return result;
+}
+function set_store_value(store, ret, value) {
+  store.set(value);
+  return ret;
 }
 function listen(node, event, handler, options) {
   node.addEventListener(event, handler, options);
@@ -254,4 +272,4 @@ function add_attribute(name, value, boolean) {
 function style_object_to_string(style_object) {
   return Object.keys(style_object).filter((key) => style_object[key]).map((key) => `${key}: ${style_object[key]};`).join(" ");
 }
-export { escape as a, createEventDispatcher as b, create_ssr_component as c, bubble as d, each as e, stop_propagation as f, compute_rest_props as g, get_current_component as h, spread as i, escape_object as j, add_attribute as k, listen as l, missing_component as m, getContext as n, onDestroy as o, prevent_default as p, globals as q, escape_attribute_value as r, setContext as s, noop as t, safe_not_equal as u, validate_component as v };
+export { subscribe as a, set_store_value as b, create_ssr_component as c, compute_rest_props as d, getContext as e, spread as f, get_current_component as g, escape_attribute_value as h, escape_object as i, add_attribute as j, escape as k, globals as l, missing_component as m, compute_slots as n, onDestroy as o, each as p, createEventDispatcher as q, listen as r, setContext as s, bubble as t, prevent_default as u, validate_component as v, stop_propagation as w, noop as x, safe_not_equal as y };

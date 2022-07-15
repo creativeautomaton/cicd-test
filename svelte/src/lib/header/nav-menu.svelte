@@ -56,35 +56,37 @@
       <Text>Contact</Text>
     </Item>
 
-    <Separator />
-    <Subheader component={H6}>Labels</Subheader>
-    <Item
-      href="javascript:void(0)"
-      on:click={() => setActive("Family")}
-      on:click={toggleMenu}
-      activated={active === "Family"}
-    >
-      <Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
-      <Text>Family</Text>
-    </Item>
-    <Item
-      href="javascript:void(0)"
-      on:click={() => setActive("Friends")}
-      on:click={toggleMenu}
-      activated={active === "Friends"}
-    >
-      <Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
-      <Text>Friends</Text>
-    </Item>
-    <Item
-      href="javascript:void(0)"
-      on:click={() => setActive("Work")}
-      on:click={toggleMenu}
-      activated={active === "Work"}
-    >
-      <Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
-      <Text>Work</Text>
-    </Item>
+    <div class="hidden">
+      <Separator />
+      <Subheader component={H6}>Labels</Subheader>
+      <Item
+        href="javascript:void(0)"
+        on:click={() => setActive("Family")}
+        on:click={toggleMenu}
+        activated={active === "Family"}
+      >
+        <Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
+        <Text>Family</Text>
+      </Item>
+      <Item
+        href="javascript:void(0)"
+        on:click={() => setActive("Friends")}
+        on:click={toggleMenu}
+        activated={active === "Friends"}
+      >
+        <Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
+        <Text>Friends</Text>
+      </Item>
+      <Item
+        href="javascript:void(0)"
+        on:click={() => setActive("Work")}
+        on:click={toggleMenu}
+        activated={active === "Work"}
+      >
+        <Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
+        <Text>Work</Text>
+      </Item>
+    </div>
   </List>
 </div>
 
