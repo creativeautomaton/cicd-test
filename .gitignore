@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-#/build
+
 /data/
 /.svelte-kit
 /package
@@ -91,7 +91,7 @@ $RECYCLE.BIN/
 # Misc.
 ############################
 
-*#
+
 ssl
 .idea
 nbproject
@@ -125,5 +125,4 @@ coverage
 license.txt
 exports
 *.cache
-#build
 .strapi-updater.json
