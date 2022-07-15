@@ -53,7 +53,9 @@
         >
       </Section>
     </Row>
-    <NavSubmenu />
+    <div class="desktop">
+      <NavSubmenu />
+    </div>
   </TopAppBar>
   <div style="padding-bottom: 9em;" />
 </div>

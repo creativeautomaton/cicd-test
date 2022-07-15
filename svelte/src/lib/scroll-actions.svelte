@@ -8,7 +8,7 @@
   //   dispatch("message");
   // }
   function scrollCheck(y) {
-    console.log(y);
+    // console.log(y);
     // if y is larger than 600 than call function
     visible = y < 50 ? false : true;
     // headerShow(visible);

@@ -1,4 +1,4 @@
-import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from "./chunks/index-9bef2b13.js";
+import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from "./chunks/index-5d194541.js";
 function afterUpdate() {
 }
 const Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -2065,7 +2065,7 @@ async function respond(request, options, state) {
   const event = {
     get clientAddress() {
       if (!state.getClientAddress) {
-        throw new Error(`${"undefined"} does not specify getClientAddress. Please raise an issue`);
+        throw new Error(`${"@sveltejs/adapter-static"} does not specify getClientAddress. Please raise an issue`);
       }
       Object.defineProperty(event, "clientAddress", {
         value: state.getClientAddress()
@@ -2235,7 +2235,7 @@ function set_paths(paths) {
 }
 function set_prerendering(value) {
 }
-const template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<!-- Material Icons -->\n			<link\n			  rel="stylesheet"\n			  href="https://fonts.googleapis.com/icon?family=Material+Icons"\n			/>\n			<!-- Roboto -->\n			<link\n			  rel="stylesheet"\n			  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"\n			/>\n			<!-- Roboto Mono -->\n			<link\n			  rel="stylesheet"\n			  href="https://fonts.googleapis.com/css?family=Roboto+Mono"\n			/>\n			<!-- SMUI Styles -->\n			<!-- <link rel="stylesheet" href="smui.css" />\n			<link rel="stylesheet" href="node_modules/svelte-material-ui/bare.css" /> -->\n			<!-- SMUI Styles -->\n			<link\n			  rel="stylesheet"\n			  href="smui.css"\n			  media="(prefers-color-scheme: light)"\n			/>\n			<link\n			  rel="stylesheet"\n			  href="smui-dark.css"\n			  media="screen and (prefers-color-scheme: dark)"\n			/>\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + "</div>\n	</body>\n</html>\n";
+const template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <!-- Material Icons -->\n    <!-- <link\n			  rel="stylesheet"\n			  href="https://fonts.googleapis.com/icon?family=Material+Icons"\n			/> -->\n    <!-- Roboto -->\n    <!-- <link\n			  rel="stylesheet"\n			  href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700"\n			/> -->\n    <!-- open Sans -->\n    <!-- <link\n			  rel="stylesheet"\n			  href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,500,600,700"\n			/> -->\n    <!-- Roboto Mono -->\n    <!-- <link\n			  rel="stylesheet"\n			  href="https://fonts.googleapis.com/css?family=Roboto+Mono"\n			/> -->\n    <!-- SMUI Styles -->\n    <link\n      rel="stylesheet"\n      href="smui.css"\n      media="(prefers-color-scheme: light)"\n    />\n    <link\n      rel="stylesheet"\n      href="smui-dark.css"\n      media="screen and (prefers-color-scheme: dark)"\n    />\n    ' + head + "\n  </head>\n  <body>\n    <div>" + body + "</div>\n  </body>\n</html>\n";
 let read = null;
 set_paths({ "base": "", "assets": "" });
 let default_protocol = "https";
@@ -2267,9 +2267,9 @@ class Server {
       manifest,
       method_override: { "parameter": "_method", "allowed": [] },
       paths: { base, assets },
-      prefix: assets + "/_app/immutable/",
+      prefix: assets + "/_appuyu/immutable/",
       prerender: {
-        default: false,
+        default: true,
         enabled: true
       },
       read,

@@ -21,6 +21,12 @@
   }
   import Topbar from "$lib/header/topbar.svelte";
   import NavMenu from "$lib/header/nav-menu.svelte";
+
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
+  // scroll actions
+  import ScrollActions from "$lib/scroll-actions.svelte";
 </script>
 
 <div class="drawer-container">
@@ -28,7 +34,7 @@
         It adds a style for absolute positioning. -->
   <Drawer variant="modal" bind:open>
     <Header align="end">
-      <Button on:click={() => (open = !open)}>
+      <Button on:click={setActive}>
         close <IconButton class="material-icons">close</IconButton>
       </Button>
       <Title>CRIB</Title>
@@ -44,7 +50,7 @@
   <Scrim fixed={false} />
   <AppContent class="app-content">
     <main class="main-content">
-      <Topbar on:message={() => (open = !open)} />
+      <!-- <Topbar on:message={() => (open = !open)} /> -->
     </main>
   </AppContent>
 </div>
@@ -53,7 +59,7 @@
   /* These classes are only needed because the
     drawer is in a container on the page. */
   .drawer-container {
-    position: relative;
+    position: absolute;
     display: flex;
     height: auto;
     overflow: hidden;

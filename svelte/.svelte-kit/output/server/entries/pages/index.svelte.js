@@ -1,15 +1,16 @@
-import { c as create_ssr_component, a as compute_rest_props, g as get_current_component, i as getContext, v as validate_component, m as missing_component } from "../../chunks/index-9bef2b13.js";
-import "@material/banner";
-import "@material/dom";
-import { f as forwardEventsBuilder, c as classMap, j as Span } from "../../chunks/logo-hero.svelte_svelte_type_style_lang-66de86f8.js";
-import { L as LayoutGrid, C as Cell, B as Button_1, I as IconButton } from "../../chunks/index-27b92c51.js";
-import "@material/top-app-bar";
-import "@material/checkbox";
-import "@material/ripple";
-import "@material/form-field";
-import "@material/drawer";
-import "@material/list";
+import { c as create_ssr_component, g as compute_rest_props, h as get_current_component, n as getContext, v as validate_component, m as missing_component, t as noop, u as safe_not_equal, i as spread, r as escape_attribute_value, j as escape_object, k as add_attribute, s as setContext, e as each, a as escape, b as createEventDispatcher } from "../../chunks/index-5d194541.js";
+import { B as Button_1, I as IconButton, D as Drawer_1 } from "../../chunks/drawer-da496e50.js";
+import { MDCTopAppBarBaseFoundation, MDCShortTopAppBarFoundation, MDCFixedTopAppBarFoundation, MDCTopAppBarFoundation } from "@material/top-app-bar";
+import { f as forwardEventsBuilder, b as classMap, k as Span, d as dispatch, l as Row, m as Title } from "../../chunks/drawer.svelte_svelte_type_style_lang-d9b42fa3.js";
 import "@material/icon-button";
+import "@material/ripple";
+import "@material/dom";
+import "@material/checkbox";
+import "@material/form-field";
+import "@material/list";
+import { P as Pill_logo } from "../../chunks/blue-swoop.svelte_svelte_type_style_lang-acacb985.js";
+import { L as LayoutGrid, C as Cell } from "../../chunks/index-f419de0a.js";
+import "@material/drawer";
 const CommonLabel = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["use", "class", "component", "getElement"]);
   const forwardEvents = forwardEventsBuilder(get_current_component());
@@ -60,71 +61,654 @@ const CommonLabel = create_ssr_component(($$result, $$props, $$bindings, slots) 
   } while (!$$settled);
   return $$rendered;
 });
+const subscriber_queue = [];
+function readable(value, start) {
+  return {
+    subscribe: writable(value, start).subscribe
+  };
+}
+function writable(value, start = noop) {
+  let stop;
+  const subscribers = /* @__PURE__ */ new Set();
+  function set(new_value) {
+    if (safe_not_equal(value, new_value)) {
+      value = new_value;
+      if (stop) {
+        const run_queue = !subscriber_queue.length;
+        for (const subscriber of subscribers) {
+          subscriber[1]();
+          subscriber_queue.push(subscriber, value);
+        }
+        if (run_queue) {
+          for (let i = 0; i < subscriber_queue.length; i += 2) {
+            subscriber_queue[i][0](subscriber_queue[i + 1]);
+          }
+          subscriber_queue.length = 0;
+        }
+      }
+    }
+  }
+  function update(fn) {
+    set(fn(value));
+  }
+  function subscribe(run, invalidate = noop) {
+    const subscriber = [run, invalidate];
+    subscribers.add(subscriber);
+    if (subscribers.size === 1) {
+      stop = start(set) || noop;
+    }
+    run(value);
+    return () => {
+      subscribers.delete(subscriber);
+      if (subscribers.size === 0) {
+        stop();
+        stop = null;
+      }
+    };
+  }
+  return { set, update, subscribe };
+}
 const Label = CommonLabel;
-const css$1 = {
-  code: ".demo-cell.svelte-25tok8{height:auto;display:flex;justify-content:center;align-items:center;color:var(--mdc-theme-on-secondary, #333);padding:1em;margin:1em}.lead.svelte-25tok8{font-size:2em;font-weight:300;line-height:1.2;display:block}",
+const TopAppBar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$restProps = compute_rest_props($$props, [
+    "use",
+    "class",
+    "style",
+    "variant",
+    "color",
+    "collapsed",
+    "prominent",
+    "dense",
+    "scrollTarget",
+    "getPropStore",
+    "getElement"
+  ]);
+  forwardEventsBuilder(get_current_component());
+  let uninitializedValue = () => {
+  };
+  function isUninitializedValue(value) {
+    return value === uninitializedValue;
+  }
+  let { use = [] } = $$props;
+  let { class: className = "" } = $$props;
+  let { style = "" } = $$props;
+  let { variant = "standard" } = $$props;
+  let { color = "primary" } = $$props;
+  let { collapsed = uninitializedValue } = $$props;
+  const alwaysCollapsed = !isUninitializedValue(collapsed) && !!collapsed;
+  if (isUninitializedValue(collapsed)) {
+    collapsed = false;
+  }
+  let { prominent = false } = $$props;
+  let { dense = false } = $$props;
+  let { scrollTarget = void 0 } = $$props;
+  let element;
+  let instance;
+  let internalClasses = {};
+  let internalStyles = {};
+  let propStoreSet;
+  let propStore = readable({ variant, prominent, dense }, (set) => {
+    propStoreSet = set;
+  });
+  let oldScrollTarget = void 0;
+  let oldVariant = variant;
+  function getInstance() {
+    const Foundation = {
+      static: MDCTopAppBarBaseFoundation,
+      short: MDCShortTopAppBarFoundation,
+      fixed: MDCFixedTopAppBarFoundation
+    }[variant] || MDCTopAppBarFoundation;
+    return new Foundation({
+      hasClass,
+      addClass,
+      removeClass,
+      setStyle: addStyle,
+      getTopAppBarHeight: () => element.clientHeight,
+      notifyNavigationIconClicked: () => dispatch(element, "SMUITopAppBar:nav", void 0, void 0, true),
+      getViewportScrollY: () => scrollTarget == null ? window.pageYOffset : scrollTarget.scrollTop,
+      getTotalActionItems: () => element.querySelectorAll(".mdc-top-app-bar__action-item").length
+    });
+  }
+  function hasClass(className2) {
+    return className2 in internalClasses ? internalClasses[className2] : getElement().classList.contains(className2);
+  }
+  function addClass(className2) {
+    if (!internalClasses[className2]) {
+      internalClasses[className2] = true;
+    }
+  }
+  function removeClass(className2) {
+    if (!(className2 in internalClasses) || internalClasses[className2]) {
+      internalClasses[className2] = false;
+    }
+  }
+  function addStyle(name, value) {
+    if (internalStyles[name] != value) {
+      if (value === "" || value == null) {
+        delete internalStyles[name];
+        internalStyles = internalStyles;
+      } else {
+        internalStyles[name] = value;
+      }
+    }
+  }
+  function handleTargetScroll() {
+    if (instance) {
+      instance.handleTargetScroll();
+      if (variant === "short") {
+        collapsed = "isCollapsed" in instance && instance.isCollapsed;
+      }
+    }
+  }
+  function getPropStore() {
+    return propStore;
+  }
+  function getElement() {
+    return element;
+  }
+  if ($$props.use === void 0 && $$bindings.use && use !== void 0)
+    $$bindings.use(use);
+  if ($$props.class === void 0 && $$bindings.class && className !== void 0)
+    $$bindings.class(className);
+  if ($$props.style === void 0 && $$bindings.style && style !== void 0)
+    $$bindings.style(style);
+  if ($$props.variant === void 0 && $$bindings.variant && variant !== void 0)
+    $$bindings.variant(variant);
+  if ($$props.color === void 0 && $$bindings.color && color !== void 0)
+    $$bindings.color(color);
+  if ($$props.collapsed === void 0 && $$bindings.collapsed && collapsed !== void 0)
+    $$bindings.collapsed(collapsed);
+  if ($$props.prominent === void 0 && $$bindings.prominent && prominent !== void 0)
+    $$bindings.prominent(prominent);
+  if ($$props.dense === void 0 && $$bindings.dense && dense !== void 0)
+    $$bindings.dense(dense);
+  if ($$props.scrollTarget === void 0 && $$bindings.scrollTarget && scrollTarget !== void 0)
+    $$bindings.scrollTarget(scrollTarget);
+  if ($$props.getPropStore === void 0 && $$bindings.getPropStore && getPropStore !== void 0)
+    $$bindings.getPropStore(getPropStore);
+  if ($$props.getElement === void 0 && $$bindings.getElement && getElement !== void 0)
+    $$bindings.getElement(getElement);
+  {
+    if (propStoreSet) {
+      propStoreSet({ variant, prominent, dense });
+    }
+  }
+  {
+    if (oldVariant !== variant && instance) {
+      oldVariant = variant;
+      instance.destroy();
+      internalClasses = {};
+      internalStyles = {};
+      instance = getInstance();
+      instance.init();
+    }
+  }
+  {
+    if (instance && variant === "short" && "setAlwaysCollapsed" in instance) {
+      instance.setAlwaysCollapsed(alwaysCollapsed);
+    }
+  }
+  {
+    if (oldScrollTarget !== scrollTarget) {
+      if (oldScrollTarget) {
+        oldScrollTarget.removeEventListener("scroll", handleTargetScroll);
+      }
+      if (scrollTarget) {
+        scrollTarget.addEventListener("scroll", handleTargetScroll);
+      }
+      oldScrollTarget = scrollTarget;
+    }
+  }
+  return `
+
+<header${spread([
+    {
+      class: escape_attribute_value(classMap({
+        [className]: true,
+        "mdc-top-app-bar": true,
+        "mdc-top-app-bar--short": variant === "short",
+        "mdc-top-app-bar--short-collapsed": collapsed,
+        "mdc-top-app-bar--fixed": variant === "fixed",
+        "smui-top-app-bar--static": variant === "static",
+        "smui-top-app-bar--color-secondary": color === "secondary",
+        "mdc-top-app-bar--prominent": prominent,
+        "mdc-top-app-bar--dense": dense,
+        ...internalClasses
+      }))
+    },
+    {
+      style: escape_attribute_value(Object.entries(internalStyles).map(([name, value]) => `${name}: ${value};`).concat([style]).join(" "))
+    },
+    escape_object($$restProps)
+  ], {})}${add_attribute("this", element, 0)}>${slots.default ? slots.default({}) : ``}
+</header>`;
+});
+const Section$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$restProps = compute_rest_props($$props, ["use", "class", "align", "toolbar", "getElement"]);
+  forwardEventsBuilder(get_current_component());
+  let { use = [] } = $$props;
+  let { class: className = "" } = $$props;
+  let { align = "start" } = $$props;
+  let { toolbar = false } = $$props;
+  let element;
+  setContext("SMUI:icon-button:context", toolbar ? "top-app-bar:action" : "top-app-bar:navigation");
+  setContext("SMUI:button:context", toolbar ? "top-app-bar:action" : "top-app-bar:navigation");
+  function getElement() {
+    return element;
+  }
+  if ($$props.use === void 0 && $$bindings.use && use !== void 0)
+    $$bindings.use(use);
+  if ($$props.class === void 0 && $$bindings.class && className !== void 0)
+    $$bindings.class(className);
+  if ($$props.align === void 0 && $$bindings.align && align !== void 0)
+    $$bindings.align(align);
+  if ($$props.toolbar === void 0 && $$bindings.toolbar && toolbar !== void 0)
+    $$bindings.toolbar(toolbar);
+  if ($$props.getElement === void 0 && $$bindings.getElement && getElement !== void 0)
+    $$bindings.getElement(getElement);
+  return `<section${spread([
+    {
+      class: escape_attribute_value(classMap({
+        [className]: true,
+        "mdc-top-app-bar__section": true,
+        "mdc-top-app-bar__section--align-start": align === "start",
+        "mdc-top-app-bar__section--align-end": align === "end"
+      }))
+    },
+    escape_object(toolbar ? { role: "toolbar" } : {}),
+    escape_object($$restProps)
+  ], {})}${add_attribute("this", element, 0)}>${slots.default ? slots.default({}) : ``}
+</section>`;
+});
+const Section = Section$1;
+const css$4 = {
+  code: '.branding.svelte-1535w6g{background-color:var(--mdc-theme-primary, #fff)}.logo.svelte-1535w6g{width:auto;display:block;padding:3px 1em;font-family:"open Sans", san-serif;font-size:1.1em;line-height:2em;font-weight:500}',
   map: null
 };
-const Logo_hero = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$1);
-  return `<br>
-<br>
-<br>
-<br>
-${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, {}, {}, {
+const Brand_banner = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  $$result.css.add(css$4);
+  return `<div class="${"branding svelte-1535w6g"}"><a href="${"https://liu.edu"}" target="${"_blank"}" class="${"logo light svelte-1535w6g"}">LONG ISLAND UNIVERSITY
+  </a>
+</div>`;
+});
+const css$3 = {
+  code: "@media(max-width: 480px){}",
+  map: null
+};
+const Nav_submenu = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let nav_menu = [
+    { slug: "home", title: "Home" },
+    { slug: "about", title: "About" },
+    { slug: "research", title: "Research" },
+    { slug: "contact", title: "Contact" }
+  ];
+  let { active = "Home" } = $$props;
+  if ($$props.active === void 0 && $$bindings.active && active !== void 0)
+    $$bindings.active(active);
+  $$result.css.add(css$3);
+  return `${validate_component(TopAppBar, "TopAppBar").$$render($$result, { variant: "static", dense: true }, {}, {
     default: () => {
-      return `${validate_component(Cell, "Cell").$$render($$result, { span: 4 }, {}, {
+      return `${validate_component(Row, "Row").$$render($$result, { class: "brand-color" }, {}, {
         default: () => {
-          return `<div class="${"demo-cell svelte-25tok8"}"><svg class="${"pill-icon rotate-in"}" viewBox="${"0 0 119.0625 119.0625"}" style="${"width: 30em; top: 2em;"}"><defs id="${"defs992"}"><linearGradient inkscape:collect="${"always"}" xlink:href="${"#linearGradient5143"}" id="${"linearGradient963"}" gradientUnits="${"userSpaceOnUse"}" gradientTransform="${"matrix(0.97958221,0,0,0.98922839,26.360394,3.69165)"}" x1="${"107.60492"}" y1="${"160.5574"}" x2="${"121.51935"}" y2="${"157.3446"}"></linearGradient><linearGradient inkscape:collect="${"always"}" id="${"linearGradient5143"}"><stop style="${"stop-color:#cccccc;stop-opacity:1;"}" offset="${"0"}" id="${"stop5139"}"></stop><stop style="${"stop-color:#ffffff;stop-opacity:1"}" offset="${"1"}" id="${"stop5141"}"></stop></linearGradient><linearGradient inkscape:collect="${"always"}" xlink:href="${"#linearGradient5151"}" id="${"linearGradient5153"}" x1="${"140.98512"}" y1="${"180.10159"}" x2="${"125.10828"}" y2="${"188.22809"}" gradientUnits="${"userSpaceOnUse"}" gradientTransform="${"matrix(1.0769291,0,0,1.0330553,12.82733,-4.25291)"}"></linearGradient><linearGradient inkscape:collect="${"always"}" id="${"linearGradient5151"}"><stop style="${"stop-color:#a51417;stop-opacity:1;"}" offset="${"0"}" id="${"stop5147"}"></stop><stop style="${"stop-color:#e9cacb;stop-opacity:1"}" offset="${"1"}" id="${"stop5149"}"></stop></linearGradient><linearGradient inkscape:collect="${"always"}" xlink:href="${"#linearGradient5143"}" id="${"linearGradient957"}" gradientUnits="${"userSpaceOnUse"}" gradientTransform="${"matrix(-0.47942469,-0.8248045,0.87207026,-0.4534401,-26.02641,408.21645)"}" x1="${"107.60492"}" y1="${"160.5574"}" x2="${"121.51935"}" y2="${"157.3446"}"></linearGradient><linearGradient inkscape:collect="${"always"}" xlink:href="${"#linearGradient5258"}" id="${"linearGradient959"}" gradientUnits="${"userSpaceOnUse"}" gradientTransform="${"matrix(-0.42637411,-0.90031877,0.8819972,-0.4352311,-34.864115,416.43225)"}" x1="${"133.2366"}" y1="${"191.35564"}" x2="${"149.35953"}" y2="${"175.44536"}"></linearGradient><linearGradient id="${"linearGradient5258"}" inkscape:collect="${"always"}"><stop id="${"stop5254"}" offset="${"0"}" style="${"stop-color:#2d5f5f;stop-opacity:1"}"></stop><stop id="${"stop5256"}" offset="${"1"}" style="${"stop-color:#d0d0d0;stop-opacity:1"}"></stop></linearGradient><linearGradient inkscape:collect="${"always"}" xlink:href="${"#linearGradient5143"}" id="${"linearGradient5145-60"}" x1="${"107.60492"}" y1="${"160.5574"}" x2="${"121.51935"}" y2="${"157.3446"}" gradientUnits="${"userSpaceOnUse"}" gradientTransform="${"matrix(-0.43425199,0.91624216,-0.89829378,-0.44292857,224.01578,198.00481)"}"></linearGradient><linearGradient inkscape:collect="${"always"}" xlink:href="${"#linearGradient5242"}" id="${"linearGradient961"}" gradientUnits="${"userSpaceOnUse"}" gradientTransform="${"matrix(-0.48667458,0.91560955,-0.90656412,-0.49036596,233.68385,204.63363)"}" x1="${"144.28831"}" y1="${"180.22009"}" x2="${"127.1244"}" y2="${"188.42982"}"></linearGradient><linearGradient inkscape:collect="${"always"}" id="${"linearGradient5242"}"><stop style="${"stop-color:#318e80;stop-opacity:1;"}" offset="${"0"}" id="${"stop5238"}"></stop><stop style="${"stop-color:#97b6b1;stop-opacity:1"}" offset="${"1"}" id="${"stop5240"}"></stop></linearGradient><linearGradient inkscape:collect="${"always"}" xlink:href="${"#linearGradient5143"}" id="${"linearGradient1225"}" gradientUnits="${"userSpaceOnUse"}" gradientTransform="${"matrix(-0.47942469,-0.8248045,0.87207026,-0.4534401,-26.02641,408.21645)"}" x1="${"107.60492"}" y1="${"160.5574"}" x2="${"121.51935"}" y2="${"157.3446"}"></linearGradient></defs><g inkscape:label="${"bg"}" inkscape:groupmode="${"layer"}" id="${"layer1"}" transform="${"translate(-31.887321,-147.6801)"}"></g><g inkscape:groupmode="${"layer"}" id="${"layer12"}" inkscape:label="${"pill"}" transform="${"translate(-31.887321,-147.6801)"}"><g inkscape:groupmode="${"layer"}" id="${"layer11"}" inkscape:label="${"blue circle"}"></g><g inkscape:groupmode="${"layer"}" id="${"layer10"}" inkscape:label="${"grey pill"}"></g><g inkscape:groupmode="${"layer"}" id="${"layer9"}" inkscape:label="${"green pill"}"></g><g inkscape:groupmode="${"layer"}" id="${"layer7"}" inkscape:label="${"blue shadow"}" style="${"display:inline"}"></g><g inkscape:groupmode="${"layer"}" id="${"layer8"}" inkscape:label="${"red pill"}"><g id="${"g1223"}" transform="${"translate(-8.3154762,-0.37797622)"}"><ellipse style="${"display:inline;fill:#2885b9;fill-opacity:1;stroke:none;stroke-width:0.2565051"}" ry="${"26.880894"}" rx="${"25.955479"}" cy="${"197.44211"}" cx="${"97.742363"}" id="${"path1414"}"></ellipse><g id="${"g1090"}" style="${"display:inline"}" transform="${"translate(57.81543,-44.71928)"}"><g transform="${"rotate(3.2,81.004219,224.41439)"}" id="${"g1182"}"><path inkscape:connector-curvature="${"0"}" id="${"path5060-7"}" d="${"m 64.475102,232.86537 -11.19208,20.64245 c 0,0 -7.231112,7.97064 -17.855749,1.77366 -12.497317,-7.28925 -7.675683,-18.74379 -7.675683,-18.74379 l 4.104699,-6.60003 9.338014,-12.366 c 0,0 6.715093,-13.02391 19.639703,4.41156"}" style="${"fill:url(#linearGradient1225);fill-opacity:1;stroke:none;stroke-width:0.58069271;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"}" sodipodi:nodetypes="${"ccscccc"}"></path><path sodipodi:nodetypes="${"ccsccc"}" inkscape:connector-curvature="${"0"}" id="${"path5058-2"}" d="${"m 64.475102,232.86537 12.627283,-19.67246 c 0,0 4.957437,-9.55557 -3.899935,-16.10025 -8.857362,-6.54467 -16.800632,-2.09793 -19.075801,0.91395 -2.275152,3.01193 -12.932346,19.56505 -12.932346,19.56505 0,0 11.847207,-3.20418 23.280799,15.29371 z"}" style="${"fill:url(#linearGradient959);fill-opacity:1;stroke:none;stroke-width:0.26187733px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"}"></path></g></g><g id="${"g1136"}" style="${"display:inline"}" transform="${"translate(57.408839,-48.04229)"}"><path sodipodi:nodetypes="${"ccscccc"}" style="${"fill:url(#linearGradient5145-60);fill-opacity:1;stroke:none;stroke-width:2.01533842;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"}" d="${"m 16.996649,232.43467 27.27703,-3.64029 c 0,0 11.086972,1.03534 11.902949,13.77318 0.959801,14.98297 -11.738151,18.13818 -11.738151,18.13818 l -8.086904,0.71229 -16.108571,-0.0387 c 0,0 -10.8055198,-7.2506 -3.246353,-28.9447"}" id="${"path5060-8"}" inkscape:connector-curvature="${"0"}"></path><path sodipodi:nodetypes="${"cccccc"}" style="${"opacity:1;fill:url(#linearGradient961);fill-opacity:1;stroke:none;stroke-width:0.27352175px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"}" d="${"m 18.057046,232.25363 -24.4814776,3.17063 c 0,0 -10.7960874,1.36321 -10.7815954,12.95611 0.01451,11.5929 8.6188621,14.91031 12.530583,15.02108 3.91171669,0.11076 24.837322,-1.49224 24.837322,-1.49224 0,0 -10.4547461,-8.55131 -2.104832,-29.65558 z"}" id="${"path5058-1"}" inkscape:connector-curvature="${"0"}"></path></g><path inkscape:connector-curvature="${"0"}" id="${"path5060-5"}" d="${"m 89.600415,214.36477 -8.628123,-14.81314 c 0,0 -1.789208,-3.73427 -0.127373,-8.95226 0.74374,-2.33527 4.020595,-6.15266 7.437128,-7.87564 6.119007,-3.08586 10.068136,-3.20366 13.705113,-2.12834 2.99947,0.88683 5.67951,2.42206 5.67951,2.42206 l 3.1753,2.85732 3.10256,4.46861 2.99911,5.33105 4.56352,8.06802 c 0,0 -1.34717,17.30982 -25.159126,19.70108"}" style="${"display:inline;fill:#2885b9;fill-opacity:1;stroke:none;stroke-width:3.07599735;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"}" sodipodi:nodetypes="${"ccssscccccc"}"></path><g transform="${"translate(-47.720246,50.027083)"}" id="${"g1065"}"><path sodipodi:nodetypes="${"ccsscccc"}" style="${"display:inline;fill:url(#linearGradient963);fill-opacity:1;stroke:none;stroke-width:2.95318031;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"}" d="${"m 144.65806,173.91696 -13.8749,-23.74363 c 0,0 -4.55208,-9.02386 5.91434,-15.51637 5.77378,-3.58158 11.04678,-3.42182 14.87755,-1.75101 4.37454,1.90797 8.93052,9.70022 8.93052,9.70022 l 0.99927,1.7723 6.84978,14.39534 c 0,0 -1.66617,12.71278 -23.69656,15.14315"}" id="${"path5060"}" inkscape:connector-curvature="${"0"}"></path><path style="${"display:inline;fill:url(#linearGradient5153);fill-opacity:1;stroke:none;stroke-width:0.27907303px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"}" d="${"m 144.06828,173.41645 12.24543,20.0116 c 0,0 9.08425,9.23535 19.259,3.04131 8.97977,-5.46658 7.75861,-12.90539 5.92687,-16.41963 -1.83173,-3.51423 -13.14496,-21.27592 -13.14496,-21.27592 0,0 -0.88077,12.10458 -24.28634,14.64264 z"}" id="${"path5058"}" inkscape:connector-curvature="${"0"}" sodipodi:nodetypes="${"ccsccc"}"></path></g></g></g></g></svg></div>`;
-        }
-      })}
-  ${validate_component(Cell, "Cell").$$render($$result, { span: 8 }, {}, {
-        default: () => {
-          return `<div class="${"demo-cell svelte-25tok8"}"><p class="${"lead svelte-25tok8"}">Center for Research Innovation in Biotechnology(<strong style="${"font-size: 1em;"}">CRIB</strong>) aggregates and analyzes the sources of scientific, medical and
-        business innovations in therapeutics &amp; vaccines.
-        <br>
-        ${validate_component(Button_1, "Button").$$render($$result, {
-            color: "secondary",
-            href: "http://cdek.liu.edu/",
-            target: "_blank",
-            variant: "raised"
-          }, {}, {
+          return `${validate_component(Section, "Section").$$render($$result, { align: "start", toolbar: true }, {}, {})}
+    ${validate_component(Section, "Section").$$render($$result, { align: "start", toolbar: true }, {}, {
             default: () => {
-              return `${validate_component(Label, "Label").$$render($$result, {}, {}, {
-                default: () => {
-                  return `Browse CDEK Data`;
-                }
-              })}
-          ${validate_component(IconButton, "IconButton").$$render($$result, { class: "material-icons" }, {}, {
-                default: () => {
-                  return `link`;
-                }
+              return `${each(nav_menu, (todo) => {
+                return `${todo.title === "Home" ? `${validate_component(Button_1, "Button").$$render($$result, {
+                  href: "/",
+                  activated: active === todo.title,
+                  class: "nav-" + todo.slug
+                }, {}, {
+                  default: () => {
+                    return `${validate_component(Label, "Label").$$render($$result, {}, {}, {
+                      default: () => {
+                        return `${escape(todo.title)}`;
+                      }
+                    })}
+          `;
+                  }
+                })}` : `${validate_component(Button_1, "Button").$$render($$result, {
+                  href: "/" + todo.slug,
+                  activated: active === todo.title,
+                  class: "nav-" + todo.slug
+                }, {}, {
+                  default: () => {
+                    return `${validate_component(Label, "Label").$$render($$result, {}, {}, {
+                      default: () => {
+                        return `${escape(todo.title)}`;
+                      }
+                    })}
+          `;
+                  }
+                })}`}`;
               })}`;
             }
-          })}</p></div>`;
+          })}`;
         }
       })}`;
     }
   })}`;
 });
-var index_svelte_svelte_type_style_lang = /* @__PURE__ */ (() => ".demo-cell.svelte-xpzo69{height:60px;display:flex;justify-content:center;align-items:center}")();
+const Scroll_actions = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let y;
+  let visible;
+  function scrollCheck(y2) {
+    visible = y2 < 50 ? false : true;
+  }
+  {
+    scrollCheck(y);
+  }
+  return `
+${slots.default ? slots.default({ visible }) : ``}`;
+});
+const css$2 = {
+  code: "app,body,html{display:block !important;height:auto !important;width:auto !important;position:static !important}",
+  map: null
+};
+const Topbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let topAppBar;
+  createEventDispatcher();
+  $$result.css.add(css$2);
+  let $$settled;
+  let $$rendered;
+  do {
+    $$settled = true;
+    $$rendered = `<div class="${"hid den"}">${validate_component(TopAppBar, "TopAppBar").$$render($$result, {
+      variant: "fixed",
+      color: "secondary",
+      this: topAppBar
+    }, {
+      this: ($$value) => {
+        topAppBar = $$value;
+        $$settled = false;
+      }
+    }, {
+      default: () => {
+        return `${validate_component(Brand_banner, "BrandBanner").$$render($$result, {}, {}, {})}
+    ${validate_component(Row, "Row").$$render($$result, {}, {}, {
+          default: () => {
+            return `${validate_component(Section, "Section").$$render($$result, {}, {}, {
+              default: () => {
+                return `
+        ${validate_component(Button_1, "Button").$$render($$result, {}, {}, {
+                  default: () => {
+                    return `Menu
+          ${validate_component(IconButton, "IconButton").$$render($$result, { class: "material-icons" }, {}, {
+                      default: () => {
+                        return `menu`;
+                      }
+                    })}`;
+                  }
+                })}
+        ${validate_component(Title, "Title").$$render($$result, {}, {}, {
+                  default: () => {
+                    return `<span class="${"desktop"}">Center for Research Innovation in Biotechnology
+          </span>
+          <span class="${"mobile"}">CRIB</span>`;
+                  }
+                })}`;
+              }
+            })}
+      ${validate_component(Section, "Section").$$render($$result, { align: "end", toolbar: true }, {}, {
+              default: () => {
+                return `${validate_component(IconButton, "IconButton").$$render($$result, {
+                  class: "material-icons",
+                  "aria-label": "Download"
+                }, {}, {
+                  default: () => {
+                    return `account_circle`;
+                  }
+                })}`;
+              }
+            })}`;
+          }
+        })}
+    <div class="${"desktop"}">${validate_component(Nav_submenu, "NavSubmenu").$$render($$result, {}, {}, {})}</div>`;
+      }
+    })}
+  <div style="${"padding-bottom: 9em;"}"></div>
+</div>`;
+  } while (!$$settled);
+  return $$rendered;
+});
+const css$1 = {
+  code: `.svg-holder.svelte-1kz5pl8{position:absolute;width:var(--width, "3em")}.blue-swoop.svelte-1kz5pl8{z-index:0;transform:skewY(-6deg);transform-origin:top left;background-color:#4e5e69;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3CradialGradient id='a' gradientUnits='objectBoundingBox'%3E%3Cstop offset='0' stop-color='%23518CB5'/%3E%3Cstop offset='1' stop-color='%234E5E69'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='750' x2='1550' y2='750'%3E%3Cstop offset='0' stop-color='%2350758f'/%3E%3Cstop offset='1' stop-color='%234E5E69'/%3E%3C/linearGradient%3E%3Cpath id='s' fill='url(%23b)' d='M1549.2 51.6c-5.4 99.1-20.2 197.6-44.2 293.6c-24.1 96-57.4 189.4-99.3 278.6c-41.9 89.2-92.4 174.1-150.3 253.3c-58 79.2-123.4 152.6-195.1 219c-71.7 66.4-149.6 125.8-232.2 177.2c-82.7 51.4-170.1 94.7-260.7 129.1c-90.6 34.4-184.4 60-279.5 76.3C192.6 1495 96.1 1502 0 1500c96.1-2.1 191.8-13.3 285.4-33.6c93.6-20.2 185-49.5 272.5-87.2c87.6-37.7 171.3-83.8 249.6-137.3c78.4-53.5 151.5-114.5 217.9-181.7c66.5-67.2 126.4-140.7 178.6-218.9c52.3-78.3 96.9-161.4 133-247.9c36.1-86.5 63.8-176.2 82.6-267.6c18.8-91.4 28.6-184.4 29.6-277.4c0.3-27.6 23.2-48.7 50.8-48.4s49.5 21.8 49.2 49.5c0 0.7 0 1.3-0.1 2L1549.2 51.6z'/%3E%3Cg id='g'%3E%3Cuse href='%23s' transform='scale(0.12) rotate(60)'/%3E%3Cuse href='%23s' transform='scale(0.2) rotate(10)'/%3E%3Cuse href='%23s' transform='scale(0.25) rotate(40)'/%3E%3Cuse href='%23s' transform='scale(0.3) rotate(-20)'/%3E%3Cuse href='%23s' transform='scale(0.4) rotate(-30)'/%3E%3Cuse href='%23s' transform='scale(0.5) rotate(20)'/%3E%3Cuse href='%23s' transform='scale(0.6) rotate(60)'/%3E%3Cuse href='%23s' transform='scale(0.7) rotate(10)'/%3E%3Cuse href='%23s' transform='scale(0.835) rotate(-40)'/%3E%3Cuse href='%23s' transform='scale(0.9) rotate(40)'/%3E%3Cuse href='%23s' transform='scale(1.05) rotate(25)'/%3E%3Cuse href='%23s' transform='scale(1.2) rotate(8)'/%3E%3Cuse href='%23s' transform='scale(1.333) rotate(-60)'/%3E%3Cuse href='%23s' transform='scale(1.45) rotate(-30)'/%3E%3Cuse href='%23s' transform='scale(1.6) rotate(10)'/%3E%3C/g%3E%3C/defs%3E%3Cg transform='rotate(0 0 0)'%3E%3Cg transform='rotate(0 0 0)'%3E%3Ccircle fill='url(%23a)' r='3000'/%3E%3Cg opacity='0.5'%3E%3Ccircle fill='url(%23a)' r='2000'/%3E%3Ccircle fill='url(%23a)' r='1800'/%3E%3Ccircle fill='url(%23a)' r='1700'/%3E%3Ccircle fill='url(%23a)' r='1651'/%3E%3Ccircle fill='url(%23a)' r='1450'/%3E%3Ccircle fill='url(%23a)' r='1250'/%3E%3Ccircle fill='url(%23a)' r='1175'/%3E%3Ccircle fill='url(%23a)' r='900'/%3E%3Ccircle fill='url(%23a)' r='750'/%3E%3Ccircle fill='url(%23a)' r='500'/%3E%3Ccircle fill='url(%23a)' r='380'/%3E%3Ccircle fill='url(%23a)' r='250'/%3E%3C/g%3E%3Cg transform='rotate(0 0 0)'%3E%3Cuse href='%23g' transform='rotate(10)'/%3E%3Cuse href='%23g' transform='rotate(120)'/%3E%3Cuse href='%23g' transform='rotate(240)'/%3E%3C/g%3E%3Ccircle fill-opacity='0.1' fill='url(%23a)' r='3000'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");background-attachment:fixed;background-size:cover;background-attachment:fixed;background-size:cover;height:80vh !important;min-height:600px;max-height:600px;display:block;position:absolute;width:100vw;padding:0;margin:0em 0;z-index:0}@keyframes svelte-1kz5pl8-loading{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}`,
+  map: null
+};
+const Blue_swoop = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  $$result.css.add(css$1);
+  return `<div class="${"svg-holder svelte-1kz5pl8"}"><span class="${"blue-swoop svelte-1kz5pl8"}"></span>
+</div>`;
+});
+var index_svelte_svelte_type_style_lang = /* @__PURE__ */ (() => "@media(max-width: 599px){.pill-logo-container.svelte-13ld8k3{max-width:100px}}@media(min-width: 600px) and (max-width: 839px){.pill-logo-container.svelte-13ld8k3{max-width:200px}}@media(min-width: 839px){.pill-logo-container.svelte-13ld8k3{max-width:400px}}")();
 const css = {
-  code: ".demo-cell.svelte-xpzo69{height:60px;display:flex;justify-content:center;align-items:center}",
+  code: "@media(max-width: 599px){.pill-logo-container.svelte-13ld8k3{max-width:100px}}@media(min-width: 600px) and (max-width: 839px){.pill-logo-container.svelte-13ld8k3{max-width:200px}}@media(min-width: 839px){.pill-logo-container.svelte-13ld8k3{max-width:400px}}",
   map: null
 };
 const Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { open = false } = $$props;
+  createEventDispatcher();
+  if ($$props.open === void 0 && $$bindings.open && open !== void 0)
+    $$bindings.open(open);
   $$result.css.add(css);
-  return `${validate_component(Logo_hero, "LogoHero").$$render($$result, {}, {}, {})}
+  return `
+${validate_component(Topbar, "Topbar").$$render($$result, {}, {}, {})}
+${validate_component(Drawer_1, "NavDrawer").$$render($$result, {}, {}, {})}
 
-${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, {}, {}, {
+
+
+${validate_component(Scroll_actions, "ScrollActions").$$render($$result, {}, {}, {
+    default: ({ visible }) => {
+      return `
+  ${!visible ? `<div>${validate_component(Blue_swoop, "BlueSwoop").$$render($$result, {}, {}, {})}</div>` : ``}`;
+    }
+  })}
+${validate_component(Scroll_actions, "ScrollActions").$$render($$result, {}, {}, {
+    default: ({ visible }) => {
+      return `${visible ? `<div style="${"display: block; height: 200px; width: 100%;"}"></div>` : ``}`;
+    }
+  })}
+<div class="${"container"}">${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, {}, {}, {
     default: () => {
-      return `${validate_component(Cell, "Cell").$$render($$result, { span: 12 }, {}, {
+      return `${validate_component(Scroll_actions, "ScrollActions").$$render($$result, {}, {}, {
+        default: ({ visible }) => {
+          return `${!visible ? `${validate_component(Cell, "Cell").$$render($$result, { span: 12, class: "right" }, {}, {
+            default: () => {
+              return `${validate_component(Button_1, "Button").$$render($$result, { class: "light" }, {}, {
+                default: () => {
+                  return `Menu
+            ${validate_component(IconButton, "IconButton").$$render($$result, { class: "material-icons" }, {}, {
+                    default: () => {
+                      return `menu`;
+                    }
+                  })}`;
+                }
+              })}
+          <div class="${"mobile"}">${validate_component(Button_1, "Button").$$render($$result, { class: "light" }, {}, {
+                default: () => {
+                  return `<div style="display: contents; --width:${"3em"};">${validate_component(Pill_logo, "PillLogo").$$render($$result, {}, {}, {})}</div>`;
+                }
+              })}</div>
+          ${validate_component(IconButton, "IconButton").$$render($$result, {
+                class: "material-icons light",
+                "aria-label": "Download"
+              }, {}, {
+                default: () => {
+                  return `account_circle`;
+                }
+              })}`;
+            }
+          })}` : ``}`;
+        }
+      })}`;
+    }
+  })}
+  ${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, {}, {}, {
+    default: () => {
+      return `${validate_component(Cell, "Cell").$$render($$result, { span: 5 }, {}, {
         default: () => {
-          return `<div class="${"demo-cell svelte-xpzo69"}"><h1>Welcome to SvelteKit</h1>
-      <br>
-      <br>
-      <p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
-      </p></div>`;
+          return `${validate_component(Scroll_actions, "ScrollActions").$$render($$result, {}, {}, {
+            default: ({ visible }) => {
+              return `${!visible ? `<div class="${"pill-logo-container desktop svelte-13ld8k3"}"><div style="display: contents; --width:${"20em"};">${validate_component(Pill_logo, "PillLogo").$$render($$result, {}, {}, {})}</div></div>` : ``}`;
+            }
+          })}`;
+        }
+      })}
+    ${validate_component(Cell, "Cell").$$render($$result, { span: 7 }, {}, {
+        default: () => {
+          return `<div class="${"demo-cell"}">${validate_component(Scroll_actions, "ScrollActions").$$render($$result, {}, {}, {
+            default: ({ visible }) => {
+              return `${!visible ? `<div><h1 class="${"bold headline light"}">CRIB</h1>
+              <p class="${"lead light"}">Center for Research Innovation in Biotechnology (<strong style="${"font-size: 1em;"}">CRIB</strong>) aggregates and analyzes the sources of scientific, medical
+                and business innovations in therapeutics &amp; vaccines.
+              </p>
+
+              ${validate_component(Button_1, "Button").$$render($$result, {
+                color: "secondary",
+                href: "http://cdek.liu.edu/",
+                target: "_blank",
+                variant: "raised",
+                class: "mdc-elevation--z12"
+              }, {}, {
+                default: () => {
+                  return `${validate_component(Label, "Label").$$render($$result, {}, {}, {
+                    default: () => {
+                      return `Browse CDEK Data`;
+                    }
+                  })}
+                ${validate_component(IconButton, "IconButton").$$render($$result, { class: "material-icons" }, {}, {
+                    default: () => {
+                      return `link`;
+                    }
+                  })}`;
+                }
+              })}
+              <div class="${"mobile"}"><br></div>
+              ${validate_component(Button_1, "Button").$$render($$result, {
+                color: "primary",
+                href: "#scroll-down",
+                variant: "raised",
+                class: "mdc-elevation--z12"
+              }, {}, {
+                default: () => {
+                  return `${validate_component(Label, "Label").$$render($$result, {}, {}, {
+                    default: () => {
+                      return `Discover More`;
+                    }
+                  })}
+                ${validate_component(IconButton, "IconButton").$$render($$result, { class: "material-icons" }, {}, {
+                    default: () => {
+                      return `south`;
+                    }
+                  })}`;
+                }
+              })}
+
+              <br>
+              <br></div>` : ``}`;
+            }
+          })}</div>`;
+        }
+      })}`;
+    }
+  })}
+  <div id="${"scroll-down"}" style="${"display: block; height: 150px; width: 100%;"}"></div></div>
+
+
+${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, { class: "center" }, {}, {
+    default: () => {
+      return `${validate_component(Cell, "Cell").$$render($$result, {
+        span: 6,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<div><h1>Welcome to SvelteKit</h1></div>`;
+        }
+      })}
+  ${validate_component(Cell, "Cell").$$render($$result, {
+        span: 6,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
+    </p>`;
+        }
+      })}`;
+    }
+  })}
+
+
+${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, { class: "center" }, {}, {
+    default: () => {
+      return `${validate_component(Cell, "Cell").$$render($$result, {
+        span: 4,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<div><h1>Welcome to SvelteKit</h1></div>`;
+        }
+      })}
+  ${validate_component(Cell, "Cell").$$render($$result, {
+        span: 4,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<div><img src="${"https://placeholder.pics/svg/100vwx100vh/DEDEDE/555555/test"}"></div>`;
+        }
+      })}
+  ${validate_component(Cell, "Cell").$$render($$result, {
+        span: 4,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
+    </p>`;
+        }
+      })}`;
+    }
+  })}
+
+
+${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, { class: "center" }, {}, {
+    default: () => {
+      return `${validate_component(Cell, "Cell").$$render($$result, {
+        span: 4,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<div><h1>Welcome to SvelteKit</h1></div>`;
+        }
+      })}
+  ${validate_component(Cell, "Cell").$$render($$result, {
+        span: 8,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
+    </p>`;
+        }
+      })}`;
+    }
+  })}
+
+
+${validate_component(LayoutGrid, "LayoutGrid").$$render($$result, { class: "center" }, {}, {
+    default: () => {
+      return `${validate_component(Cell, "Cell").$$render($$result, {
+        span: 8,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<div><h1>Welcome to SvelteKit</h1></div>`;
+        }
+      })}
+  ${validate_component(Cell, "Cell").$$render($$result, {
+        span: 4,
+        class: "cell rounded mdc-elevation--z1 center"
+      }, {}, {
+        default: () => {
+          return `<p>Visit <a href="${"https://kit.svelte.dev"}">kit.svelte.dev</a> to read the documentation
+    </p>`;
         }
       })}`;
     }

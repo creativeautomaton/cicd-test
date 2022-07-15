@@ -1,5 +1,9 @@
 <script lang="js">
+  export let open = false;
+
   import NavDrawer from "$lib/header/drawer.svelte";
+  import Topbar from "$lib/header/topbar.svelte";
+  import NavMenu from "$lib/header/nav-menu.svelte";
   // custom svg components
   import BlueTriangles from "$lib/svg-components/blue-triangles.svelte";
   import BlueSwoop from "$lib/svg-components/blue-swoop.svelte";
@@ -22,18 +26,28 @@
 
   // let y;
   // let visible;
+  let drawervisible = false;
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   function toggleMenu() {
+    console.log("toggleMenu");
     dispatch("message");
   }
 </script>
 
 <ScrollActions let:visible>
   {#if visible}
-    <NavDrawer />
+    <NavDrawer bind:open />
+    <Topbar on:message={() => (open = !open)} />
   {/if}
 </ScrollActions>
+
+<ScrollActions let:visible>
+  {#if !visible}
+    <NavDrawer bind:open />
+  {/if}
+</ScrollActions>
+
 <!-- <LogoHero /> -->
 
 <ScrollActions let:visible>
@@ -57,12 +71,17 @@
     <ScrollActions let:visible>
       {#if !visible}
         <Cell span={12} class="right">
-          <Button class="light" on:click={toggleMenu}>
+          <Button class="light" on:click={() => (open = !open)}>
             Menu
-            <IconButton class="material-icons">menu</IconButton>
+            {#if !drawervisible}
+              <IconButton class="material-icons">menu</IconButton>
+            {/if}
+            {#if drawervisible}
+              <IconButton class="material-icons">close</IconButton>
+            {/if}
           </Button>
           <div class="mobile">
-            <Button class="light" on:click={toggleMenu}>
+            <Button class="light" on:click={() => (open = !open)}>
               <PillLogo --width="3em" />
             </Button>
           </div>
@@ -81,7 +100,7 @@
             class="pill-logo-container desktop"
             transition:fly={{ x: -500, duration: 500 }}
           >
-            <PillLogo2 --width="20em" />
+            <PillLogo --width="20em" />
           </div>
         {/if}
       </ScrollActions>
@@ -133,6 +152,68 @@
   <div id="scroll-down" style="display: block; height: 150px; width: 100%;" />
 </div>
 
+<!-- about section tri-layout -->
+<LayoutGrid class="center">
+  <Cell span={3} />
+  <Cell span={6} class="cell center">
+    <PillLogo --width="8em" />
+    <h1 class="thin">Powerful Insights of Clinical Trials Data</h1>
+    <p class="mono">
+      C.R.I.B. brings together expertise, skills & knowledge in the
+      Pharmacology, Data Science, Clinic Trials research sectors and provides
+      clean, collected, and updated data on FDA Approved Drugs, Pharmacology
+      Organizations, Drug pricing, and medical indications(MeSH).
+    </p>
+    <br />
+    <Button
+      color="secondary"
+      href="/about"
+      variant="outlined"
+      class=" rou snded"
+    >
+      <Label>About CRIB</Label>
+    </Button>
+    <br />
+    <br />
+  </Cell>
+  <Cell span={3} />
+  <Cell span={2} />
+  <Cell span={2} class="cell center">
+    <span class="medium-blue">
+      <IconButton class="material-icons " --font-size="4em">
+        compare_arrows
+      </IconButton>
+    </span>
+    <h3>Source Comparisions</h3>
+    <p>Cleaning clinical trials data from multiple sources.</p>
+  </Cell>
+  <Cell span={2} class="cell center">
+    <span class="medium-blue">
+      <IconButton class="material-icons " --font-size="4em">done_all</IconButton
+      >
+    </span>
+    <h3>Data Correction</h3>
+    <p>Programatic filtering, ML modeling, and hands-on Trial data.</p>
+  </Cell>
+  <Cell span={2} class="cell center ">
+    <span class="medium-blue">
+      <IconButton class="material-icons" --font-size="4em">auto_mode</IconButton
+      >
+    </span>
+    <h3>Data Synchronization</h3>
+    <p>Daily, Weekly, Yearly data source updates and review of Trial data</p>
+  </Cell>
+  <Cell span={2} class="cell center primary">
+    <span class="medium-blue">
+      <IconButton class="material-icons" --font-size="4em">analytics</IconButton
+      >
+    </span>
+    <h3>Reviews and Vizualizations</h3>
+    <p>published research and interactive data experiences.</p>
+  </Cell>
+  <Cell span={2} />
+</LayoutGrid>
+
 <!-- split layout -->
 <LayoutGrid class="center">
   <Cell span={6} class="cell rounded mdc-elevation--z1 center">
@@ -151,18 +232,43 @@
 <LayoutGrid class="center">
   <Cell span={4} class="cell rounded mdc-elevation--z1 center">
     <div>
-      <h1>Welcome to SvelteKit</h1>
+      <h1>Active Pharma Ingredients</h1>
+      <p>
+        <IconButton
+          class="material-icons dark btn-lg"
+          aria-label="vaccines"
+          --font-size="10em"
+        >
+          vaccines
+        </IconButton>
+      </p>
     </div>
   </Cell>
   <Cell span={4} class="cell rounded mdc-elevation--z1 center">
     <div>
-      <img src="https://placeholder.pics/svg/100vwx100vh/DEDEDE/555555/test" />
+      <h1>Organizations</h1>
+      <p>
+        <IconButton
+          inline="true"
+          class="material-icons dark "
+          aria-label="groups"
+          --font-size="10em"
+        >
+          groups
+        </IconButton>
+      </p>
     </div>
   </Cell>
   <Cell span={4} class="cell rounded mdc-elevation--z1 center">
-    <p>
-      Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-    </p>
+    <h1>Clinical Trials</h1>
+
+    <IconButton
+      class="material-icons dark "
+      aria-label="biotech"
+      --font-size="10em"
+    >
+      biotech
+    </IconButton>
   </Cell>
 </LayoutGrid>
 

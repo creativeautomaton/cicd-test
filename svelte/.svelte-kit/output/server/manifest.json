@@ -4,7 +4,7 @@
     "src": ".svelte-kit/build/index.js",
     "isEntry": true,
     "imports": [
-      "_index-9bef2b13.js"
+      "_index-5d194541.js"
     ],
     "dynamicImports": [
       ".svelte-kit/build/hooks.js"
@@ -15,12 +15,13 @@
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "imports": [
-      "_index-9bef2b13.js",
-      "_logo-hero.svelte_svelte_type_style_lang-66de86f8.js",
-      "_index-27b92c51.js"
+      "_index-5d194541.js",
+      "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js",
+      "_index-f419de0a.js",
+      "_blue-swoop.svelte_svelte_type_style_lang-acacb985.js"
     ],
     "css": [
-      "assets/entries/pages/__layout.svelte-1e32fab0.css"
+      "assets/entries/pages/__layout.svelte-0bc9889d.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -28,7 +29,7 @@
     "src": ".svelte-kit/runtime/components/error.svelte",
     "isEntry": true,
     "imports": [
-      "_index-9bef2b13.js"
+      "_index-5d194541.js"
     ]
   },
   "src/routes/about.svelte": {
@@ -36,8 +37,10 @@
     "src": "src/routes/about.svelte",
     "isEntry": true,
     "imports": [
-      "_index-9bef2b13.js",
-      "_logo-hero.svelte_svelte_type_style_lang-66de86f8.js"
+      "_index-5d194541.js",
+      "_drawer-da496e50.js",
+      "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js",
+      "_index-f419de0a.js"
     ]
   },
   "src/routes/contact.svelte": {
@@ -45,8 +48,10 @@
     "src": "src/routes/contact.svelte",
     "isEntry": true,
     "imports": [
-      "_index-9bef2b13.js",
-      "_logo-hero.svelte_svelte_type_style_lang-66de86f8.js"
+      "_index-5d194541.js",
+      "_drawer-da496e50.js",
+      "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js",
+      "_index-f419de0a.js"
     ]
   },
   "src/routes/index.svelte": {
@@ -54,12 +59,14 @@
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "imports": [
-      "_index-9bef2b13.js",
-      "_logo-hero.svelte_svelte_type_style_lang-66de86f8.js",
-      "_index-27b92c51.js"
+      "_index-5d194541.js",
+      "_drawer-da496e50.js",
+      "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js",
+      "_blue-swoop.svelte_svelte_type_style_lang-acacb985.js",
+      "_index-f419de0a.js"
     ],
     "css": [
-      "assets/entries/pages/index.svelte-e1074d0f.css"
+      "assets/entries/pages/index.svelte-459b5bd2.css"
     ]
   },
   "src/routes/research.svelte": {
@@ -67,27 +74,45 @@
     "src": "src/routes/research.svelte",
     "isEntry": true,
     "imports": [
-      "_index-9bef2b13.js",
-      "_logo-hero.svelte_svelte_type_style_lang-66de86f8.js"
+      "_index-5d194541.js",
+      "_drawer-da496e50.js",
+      "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js"
     ]
   },
-  "_index-9bef2b13.js": {
-    "file": "chunks/index-9bef2b13.js"
+  "_index-5d194541.js": {
+    "file": "chunks/index-5d194541.js"
   },
-  "_index-27b92c51.js": {
-    "file": "chunks/index-27b92c51.js",
+  "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js": {
+    "file": "chunks/drawer.svelte_svelte_type_style_lang-d9b42fa3.js",
     "imports": [
-      "_index-9bef2b13.js",
-      "_logo-hero.svelte_svelte_type_style_lang-66de86f8.js"
-    ]
-  },
-  "_logo-hero.svelte_svelte_type_style_lang-66de86f8.js": {
-    "file": "chunks/logo-hero.svelte_svelte_type_style_lang-66de86f8.js",
-    "imports": [
-      "_index-9bef2b13.js"
+      "_index-5d194541.js"
     ],
     "css": [
-      "assets/logo-hero.svelte_svelte_type_style_lang-b6f5093f.css"
+      "assets/drawer.svelte_svelte_type_style_lang-7325c954.css"
+    ]
+  },
+  "_index-f419de0a.js": {
+    "file": "chunks/index-f419de0a.js",
+    "imports": [
+      "_index-5d194541.js",
+      "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js"
+    ]
+  },
+  "_blue-swoop.svelte_svelte_type_style_lang-acacb985.js": {
+    "file": "chunks/blue-swoop.svelte_svelte_type_style_lang-acacb985.js",
+    "imports": [
+      "_index-5d194541.js",
+      "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js"
+    ],
+    "css": [
+      "assets/blue-swoop.svelte_svelte_type_style_lang-949b2abb.css"
+    ]
+  },
+  "_drawer-da496e50.js": {
+    "file": "chunks/drawer-da496e50.js",
+    "imports": [
+      "_index-5d194541.js",
+      "_drawer.svelte_svelte_type_style_lang-d9b42fa3.js"
     ]
   },
   ".svelte-kit/build/hooks.js": {

@@ -9,6 +9,8 @@
   import Paper, { Title, Subtitle, Content } from "@smui/paper";
   import Banner from "@smui/banner";
 
+  import PillLogo from "$lib/svg-components/pill-logo.svelte";
+
   let nav_menu = [
     { slug: "home", title: "Home" },
     { slug: "about", title: "About" },
@@ -34,29 +36,26 @@
 
 <div class="footer ">
   <LayoutGrid>
-    <Cell span={2} />
-    <Cell span={8}>
+    <!-- <Cell span={1} /> -->
+    <Cell span={12}>
       <LayoutGrid>
+        <Cell span={2} class="center">
+          <PillLogo --width="4em" />
+          <small>CRIB © 2022</small>
+        </Cell>
         <Cell span={3}>
           <h3>Menu</h3>
           <List>
             {#each nav_menu as todo}
               {#if todo.title === "Home"}
-                <Item
-                  href="/"
-                  on:click={() => setActive(todo.title)}
-                  activated={active === todo.title}
-                >
-                  <a href="/">
+                <Item href="/" on:click={() => setActive(todo.title)}>
+                  <a href="/" class="light">
                     <Text>{todo.title}</Text>
                   </a>
                 </Item>
               {:else}
-                <Item
-                  on:click={() => setActive(todo.title)}
-                  activated={active === todo.title}
-                >
-                  <a href="/{todo.slug}">
+                <Item on:click={() => setActive(todo.title)}>
+                  <a href="/{todo.slug}" class="light">
                     <Text>{todo.title}</Text>
                   </a>
                 </Item>
@@ -67,15 +66,15 @@
         <Cell span={3}>
           <h3>About</h3>
         </Cell>
-        <Cell span={3}>
+        <Cell span={2}>
           <h3>Research</h3>
         </Cell>
-        <Cell span={3}>
+        <Cell span={2}>
           <h3>Contact</h3>
         </Cell>
       </LayoutGrid>
     </Cell>
-    <Cell span={2} />
+    <!-- <Cell span={1} /> -->
   </LayoutGrid>
 
   <Colophon />
@@ -86,5 +85,18 @@
     min-height: 300px;
     background-color: var(--mdc-theme-secondary, #fff);
     color: #fff;
+  }
+  .mdc-deprecated-list-item {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 0;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-left: 0px;
+    padding-right: 16px;
+    height: 28px;
   }
 </style>
