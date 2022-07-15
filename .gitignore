@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-/build
+#/build
 /data/
 /.svelte-kit
 /package
@@ -125,5 +125,5 @@ coverage
 license.txt
 exports
 *.cache
-build
+#build
 .strapi-updater.json
