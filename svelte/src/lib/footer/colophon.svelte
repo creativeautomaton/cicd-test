@@ -30,10 +30,10 @@
     width: auto;
     display: block;
     padding: 5px 1em;
+  }
 
-    img {
-      width: 250px;
-      display: block;
-    }
+  img {
+    width: 250px;
+    display: block;
   }
 </style>

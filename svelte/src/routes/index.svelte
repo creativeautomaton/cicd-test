@@ -1,4 +1,7 @@
 <script lang="js">
+  // scroll actions
+  import TestPost from "$lib/test-post.svelte";
+
   export let open = false;
 
   import NavDrawer from "$lib/header/drawer.svelte";
@@ -38,7 +41,17 @@
     console.log("toggleMenu");
     dispatch("message");
   }
+
+  //   query NewQuery {
+  //   pages {
+  //     nodes {
+  //       content
+  //     }
+  //   }
+  // }
 </script>
+
+<TestPost />
 
 <ScrollActions let:visible>
   {#if visible}

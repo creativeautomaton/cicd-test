@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include 
+from django.urls import path, include
 from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
 
 from crib.admin import crib_admin_site
 
@@ -19,13 +20,14 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     #  GraphQL urls
-    path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
+    # path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
 
     path('crib-admin/', crib_admin_site.urls),
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
-    path(r'^filer/', include('filer.urls')),
+    # path(r'^filer/', include('filer.urls')),
 
 ]
 

@@ -15,7 +15,6 @@ $medium-blue: #518cb5;
 $error: #b71c1c;
 $background: #fff;
 
-
 @use "@material/theme" as theme with (
   $primary: $base,
   $on-primary: #442b2d,
@@ -120,13 +119,27 @@ $background: #fff;
   color: #000 !important;
 }
 // CRIB color classes
-.blue-grey{color:  $blue-grey};
-.light-blue{color:  $light-blue};
-.brand-color{color:  $base};
-.dark-grey{color:  $dark-grey};
-.medium-blue{color:  $medium-blue};
-.error{color:  $error};
-.background{color:  $background};
+.blue-grey {
+  color: $blue-grey;
+}
+.light-blue {
+  color: $light-blue;
+}
+.brand-color {
+  color: $base;
+}
+.dark-grey {
+  color: $dark-grey;
+}
+.medium-blue {
+  color: $medium-blue;
+}
+.error {
+  color: $error;
+}
+.background {
+  color: $background;
+}
 
 // utilities
 .left {
@@ -140,7 +153,6 @@ $background: #fff;
 .right {
   text-align: right !important;
   justify-content: end !important;
-
 }
 .pull-left {
   float: left;
@@ -148,13 +160,13 @@ $background: #fff;
 .pull-right {
   float: right;
 }
-.uppercase{
+.uppercase {
   text-transform: uppercase !important;
 }
-.lowercase{
+.lowercase {
   text-transform: lowercase !important;
 }
-.capitalize{
+.capitalize {
   text-transform: capitalize !important;
 }
 
@@ -213,7 +225,6 @@ a:visited {
   position: relative;
   max-width: 1200px;
   margin: 0px auto;
-  
 }
 .brand-color {
   background-color: $base;

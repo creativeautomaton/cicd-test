@@ -1,12 +1,14 @@
 <script lang="ts">
   import Footer from "$lib/footer/footer.svelte";
-  let nav_menu = ["Home", "About", "Research", "Contact"];
+  // let nav_menu = ["Home", "About", "Research", "Contact"];
 
-  import { createEventDispatcher } from "svelte";
-  const dispatch = createEventDispatcher();
-  function headerShow() {
-    dispatch("message");
-  }
+  // import { createEventDispatcher } from "svelte";
+  // const dispatch = createEventDispatcher();
+  // function headerShow() {
+  //   dispatch("message");
+  // }
+  // import { setEnvironment } from "$houdini";
+  // setEnvironment(env: houdiniClient)
 </script>
 
 <slot />

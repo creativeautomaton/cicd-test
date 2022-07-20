@@ -23,20 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = env('SECRET_KEY',
-#                 'h8+mu_iy6%5j%7+hp**+gsq$nmy!!mjd8z_qkd94@z!%9%!+qn')
-SECRET_KEY =  'h8+mu_iy6%5j%7+hp**+gsq$nmy!!mjd8z_qkd94@z!%9%!+qn'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == "True"
-#
-# ALLOWED_HOSTS = [os.environ.get('DOMAIN'),]
-# if DEBUG:
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ["*",]
+ALLOWED_HOSTS = [ 'crib.local', '127.0.0.1', '0.0.0.0' ]
 
 # Redirect to HTTPS by default, unless explicitly disabled
-SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') != "False"
+# SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') != "False"
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -173,7 +168,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_collected')
+STATIC_ROOT = '/static/'
+
+# os.path.join(BASE_DIR, 'staticfiles_collected')
 
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '/uploads/')
@@ -291,19 +288,37 @@ INTERNAL_IPS = ['127.0.0.1', '0.0.0.0']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     # 'backend.com', # your domain
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
+
+    'https://localhost:3000',
+    'https://127.0.0.1:3000',
+    'https://localhost:8000',
+    'https://127.0.0.1:8000',
+    'https://127.0.0.1',
+    'https://0.0.0.0:8000',
+    'https://0.0.0.0:3000',
+    'https://crib.local',
+    'crib.local',
 )
+
 CORS_ALLOW_CREDENTIALS = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# CSRF_TRUSTED_ORIGINS = ['cribhost.com']
 
 #graphql
 GRAPHENE = {
     # Where your Graphene schema lives
     'SCHEMA': 'backend.schema.schema',
     'SCHEMA_OUTPUT': './schema.json',
-    'RELAY_CONNECTION_MAX_LIMIT': 100,
+    # 'RELAY_CONNECTION_MAX_LIMIT': 100,
 }
 
 # wordpress models in django.. for testing posts, tag, and link models.

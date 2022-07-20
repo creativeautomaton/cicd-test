@@ -1,0 +1,196 @@
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+type PageMetaQuery {
+  """
+  """
+  description: String!
+
+  """
+  """
+  image: String!
+
+  """
+  """
+  pageId: PageQuery!
+
+  """
+  """
+  title: String!
+}
+
+type PageQuery {
+  """
+  """
+  author: UserQuery!
+
+  """
+  """
+  content: String!
+
+  """
+  """
+  excerpt: String!
+
+  """
+  """
+  id: ID!
+
+  """
+  """
+  slug: String!
+
+  """
+  """
+  status: PageStatus!
+
+  """
+  """
+  template: PageTemplate!
+
+  """
+  """
+  title: String!
+}
+
+"""
+An enumeration.
+"""
+enum PageStatus {
+  """
+  Draft
+  """
+  DRAFT
+
+  """
+  Publish
+  """
+  PUBLISH
+}
+
+"""
+An enumeration.
+"""
+enum PageTemplate {
+  """
+  Default
+  """
+  DEFAULT
+
+  """
+  Homepage
+  """
+  HOMEPAGE
+}
+
+type PostQuery {
+  """
+  """
+  author: UserQuery!
+
+  """
+  """
+  content: String!
+
+  """
+  """
+  excerpt: String!
+
+  """
+  """
+  slug: String!
+
+  """
+  """
+  status: PostStatus!
+
+  """
+  """
+  title: String!
+}
+
+"""
+An enumeration.
+"""
+enum PostStatus {
+  """
+  Draft
+  """
+  DRAFT
+
+  """
+  Publish
+  """
+  PUBLISH
+}
+
+type Query {
+  goodbye: String
+  hello(name: String = "stranger"): String
+  pages: [PageQuery]
+  pagesMeta: [PageMetaQuery]
+  posts: [PostQuery]
+  users: [UserQuery]
+}
+
+type UserQuery {
+  """
+  """
+  dateJoined: DateTime!
+
+  """
+  """
+  email: String!
+
+  """
+  """
+  firstName: String!
+
+  """
+  """
+  id: ID!
+
+  """
+  Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+  """
+  isActive: Boolean!
+
+  """
+  Designates whether the user can log into this admin site.
+  """
+  isStaff: Boolean!
+
+  """
+  Designates that this user has all permissions without explicitly assigning them.
+  """
+  isSuperuser: Boolean!
+
+  """
+  """
+  lastLogin: DateTime
+
+  """
+  """
+  lastName: String!
+
+  """
+  """
+  pageSet: [PageQuery!]!
+
+  """
+  """
+  password: String!
+
+  """
+  """
+  postSet: [PostQuery!]!
+
+  """
+  Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+  """
+  username: String!
+}
