@@ -10,7 +10,7 @@ WORKDIR /django-project
 COPY requirements.txt /django-project
 #COPY volt-test /django
 RUN pip install --upgrade pip
-RUN pip install uwsgi gunicorn
+#RUN pip install gunicorn
 RUN echo pip install -e $OLDPWD/django-gunicorn/volt-test
 RUN pip install -r requirements.txt --no-cache-dir
 COPY . /django-project
