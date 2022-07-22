@@ -15,7 +15,7 @@
   export let open = false;
   export let active = "Inbox";
 
-  function setActive(value: string) {
+  function setActive(value) {
     active = value;
     open = false;
   }
@@ -34,7 +34,7 @@
         It adds a style for absolute positioning. -->
   <Drawer variant="modal" bind:open>
     <Header align="end">
-      <Button on:click={setActive}>
+      <Button on:click={() => (open = !open)}>
         close <IconButton class="material-icons">close</IconButton>
       </Button>
       <Title>CRIB</Title>

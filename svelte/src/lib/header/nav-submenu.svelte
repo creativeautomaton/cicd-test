@@ -17,7 +17,7 @@
 
   export let active = "Home";
 
-  function setActive(value: string) {
+  function setActive(value) {
     active = value;
   }
 </script>

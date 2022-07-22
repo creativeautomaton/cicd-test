@@ -7,29 +7,17 @@ import { defineConfig, loadEnv } from "vite";
 const config = {
   plugins: [sveltekit()],
   // resolve: {
-  //     alias: {
-  //         // '@': path.resolve(__dirname, './src'),
-  //         $houdini: path.resolve('.', '$houdini')
-  //     }
+  //   alias: {
+  //     $houdini: path.resolve(".", "$houdini"),
+  //   },
   // },
   // server: {
   //   fs: {
   //     // Allow serving files from one level up to the project root
-  //     allow: ['..'],
+  //     // https://vitejs.dev/config/#server-fs-allow
+  //     allow: [".."],
   //   },
   // },
-  resolve: {
-    alias: {
-      $houdini: path.resolve(".", "$houdini"),
-    },
-  },
-  server: {
-    fs: {
-      // Allow serving files from one level up to the project root
-      // https://vitejs.dev/config/#server-fs-allow
-      allow: [".."],
-    },
-  },
 };
 //
 export default config;

@@ -3,34 +3,47 @@
     "file": "index.js",
     "src": ".svelte-kit/build/index.js",
     "isEntry": true,
-    "imports": ["_index-4b7b92f5.js"],
-    "dynamicImports": [".svelte-kit/build/hooks.js"]
+    "imports": [
+      "_index-37c8fe4c.js"
+    ],
+    "dynamicImports": [
+      ".svelte-kit/build/hooks.js"
+    ]
+  },
+  "src/routes/api/pages.js": {
+    "file": "entries/endpoints/api/pages.js",
+    "src": "src/routes/api/pages.js",
+    "isEntry": true
   },
   "src/routes/__layout.svelte": {
     "file": "entries/pages/__layout.svelte.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "imports": [
-      "_index-4b7b92f5.js",
-      "_pill-logo.svelte_svelte_type_style_lang-e6f75325.js",
-      "_ActionIcons-5afdc96c.js"
+      "_index-37c8fe4c.js",
+      "_pill-logo.svelte_svelte_type_style_lang-01533bd5.js",
+      "_ActionIcons-66c0a0d6.js"
     ],
-    "css": ["assets/entries/pages/__layout.svelte-ed8ecadc.css"]
+    "css": [
+      "assets/entries/pages/__layout.svelte-17b48d1c.css"
+    ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
     "file": "entries/fallbacks/error.svelte.js",
     "src": ".svelte-kit/runtime/components/error.svelte",
     "isEntry": true,
-    "imports": ["_index-4b7b92f5.js"]
+    "imports": [
+      "_index-37c8fe4c.js"
+    ]
   },
   "src/routes/about.svelte": {
     "file": "entries/pages/about.svelte.js",
     "src": "src/routes/about.svelte",
     "isEntry": true,
     "imports": [
-      "_index-4b7b92f5.js",
-      "_drawer-6761d044.js",
-      "_pill-logo.svelte_svelte_type_style_lang-e6f75325.js"
+      "_index-37c8fe4c.js",
+      "_drawer-7f37b6ef.js",
+      "_pill-logo.svelte_svelte_type_style_lang-01533bd5.js"
     ]
   },
   "src/routes/contact.svelte": {
@@ -38,9 +51,9 @@
     "src": "src/routes/contact.svelte",
     "isEntry": true,
     "imports": [
-      "_index-4b7b92f5.js",
-      "_drawer-6761d044.js",
-      "_pill-logo.svelte_svelte_type_style_lang-e6f75325.js"
+      "_index-37c8fe4c.js",
+      "_drawer-7f37b6ef.js",
+      "_pill-logo.svelte_svelte_type_style_lang-01533bd5.js"
     ]
   },
   "src/routes/index.svelte": {
@@ -48,46 +61,56 @@
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "imports": [
-      "_index-4b7b92f5.js",
-      "_drawer-6761d044.js",
-      "_pill-logo.svelte_svelte_type_style_lang-e6f75325.js",
-      "_ActionIcons-5afdc96c.js"
+      "_index-37c8fe4c.js",
+      "_drawer-7f37b6ef.js",
+      "_pill-logo.svelte_svelte_type_style_lang-01533bd5.js",
+      "_ActionIcons-66c0a0d6.js"
     ],
-    "css": ["assets/entries/pages/index.svelte-9faebc3f.css"]
+    "css": [
+      "assets/entries/pages/index.svelte-9faebc3f.css"
+    ]
   },
   "src/routes/research.svelte": {
     "file": "entries/pages/research.svelte.js",
     "src": "src/routes/research.svelte",
     "isEntry": true,
     "imports": [
-      "_index-4b7b92f5.js",
-      "_drawer-6761d044.js",
-      "_pill-logo.svelte_svelte_type_style_lang-e6f75325.js"
+      "_index-37c8fe4c.js",
+      "_drawer-7f37b6ef.js",
+      "_pill-logo.svelte_svelte_type_style_lang-01533bd5.js"
     ]
   },
-  "_index-4b7b92f5.js": {
-    "file": "chunks/index-4b7b92f5.js"
+  "_index-37c8fe4c.js": {
+    "file": "chunks/index-37c8fe4c.js"
   },
-  "_pill-logo.svelte_svelte_type_style_lang-e6f75325.js": {
-    "file": "chunks/pill-logo.svelte_svelte_type_style_lang-e6f75325.js",
-    "imports": ["_index-4b7b92f5.js"],
-    "css": ["assets/pill-logo.svelte_svelte_type_style_lang-2956e962.css"]
-  },
-  "_ActionIcons-5afdc96c.js": {
-    "file": "chunks/ActionIcons-5afdc96c.js",
+  "_pill-logo.svelte_svelte_type_style_lang-01533bd5.js": {
+    "file": "chunks/pill-logo.svelte_svelte_type_style_lang-01533bd5.js",
     "imports": [
-      "_index-4b7b92f5.js",
-      "_pill-logo.svelte_svelte_type_style_lang-e6f75325.js"
+      "_index-37c8fe4c.js"
     ],
-    "css": ["assets/ActionIcons-7e7e3094.css"]
+    "css": [
+      "assets/pill-logo.svelte_svelte_type_style_lang-2956e962.css"
+    ]
   },
-  "_drawer-6761d044.js": {
-    "file": "chunks/drawer-6761d044.js",
+  "_ActionIcons-66c0a0d6.js": {
+    "file": "chunks/ActionIcons-66c0a0d6.js",
     "imports": [
-      "_index-4b7b92f5.js",
-      "_pill-logo.svelte_svelte_type_style_lang-e6f75325.js"
+      "_index-37c8fe4c.js",
+      "_pill-logo.svelte_svelte_type_style_lang-01533bd5.js"
     ],
-    "css": ["assets/drawer-e99f809c.css"]
+    "css": [
+      "assets/ActionIcons-7e7e3094.css"
+    ]
+  },
+  "_drawer-7f37b6ef.js": {
+    "file": "chunks/drawer-7f37b6ef.js",
+    "imports": [
+      "_index-37c8fe4c.js",
+      "_pill-logo.svelte_svelte_type_style_lang-01533bd5.js"
+    ],
+    "css": [
+      "assets/drawer-c33fc034.css"
+    ]
   },
   ".svelte-kit/build/hooks.js": {
     "file": "chunks/hooks-1c45ba0b.js",

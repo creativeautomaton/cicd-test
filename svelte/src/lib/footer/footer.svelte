@@ -33,21 +33,9 @@
   import Icon from "@smui/textfield/icon";
   import HelperText from "@smui/textfield/helper-text";
 
-  // let focused = false;
-  // let emailvalue: string | null = null;
-  // let dirty = false;
-  // let invalid = false;
-  // $: disabled = focused || !emailvalue || !dirty || invalid;
-  //
-  // function clickHandler() {
-  //   alert(`Sending to ${emailvalue}!`);
-  //   emailvalue = null;
-  //   dirty = false;
-  // }
-  //
-  // function setActive(value: string) {
-  //   active = value;
-  // }
+  function setActive(value) {
+    active = value;
+  }
 </script>
 
 <div class="footer ">
@@ -129,50 +117,6 @@
 
       <Cell span={3} class="center hidden">
         <h3 class="thin uppercase">Newsletter</h3>
-        <Card variant="outlined" padded>
-          <div class="margins dark">
-            <!--
-    Note: when you bind to `invalid`, but you only want to
-    monitor it instead of updating it yourself, you also
-    should include `updateInvalid`.
-  -->
-            <!-- <Textfield
-              type="email"
-              bind:dirty
-              bind:invalid
-              updateInvalid
-              bind:emailvalue
-              label="Enter Your Email"
-              style="min-width: 250px;"
-              input$autocomplete="email"
-              on:focus={() => (focused = true)}
-              on:blur={() => (focused = false)}
-              withTrailingIcon={!disabled}
-            > -->
-            <!--
-      Since this icon is conditional, it needs to be wrapped
-      in a fragment, and we need to provide withTrailingIcon.
-    -->
-            <!-- <svelte:fragment slot="trailingIcon">
-                {#if !disabled}
-                  <Icon
-                    class="material-icons"
-                    role="button"
-                    on:click={clickHandler}>send</Icon
-                  >
-                {/if}
-              </svelte:fragment> -->
-            <!-- <HelperText validationMsg slot="helper">
-                That's not a valid email address.
-              </HelperText>
-            </Textfield> -->
-            <!-- <pre class="status hidden">
-            Focused: {focused},
-            Dirty: {dirty},
-            Invalid: {invalid},
-            Value: {emailvalue}</pre> -->
-          </div>
-        </Card>
       </Cell>
     </LayoutGrid>
   </div>

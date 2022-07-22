@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = [ 'crib.local', '127.0.0.1', '0.0.0.0' ]
+ALLOWED_HOSTS = [ 'crib.local', '127.0.0.1', '0.0.0.0', 'localhost', 'https://crib.local', ]
 
 # Redirect to HTTPS by default, unless explicitly disabled
 # SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') != "False"
@@ -288,7 +288,6 @@ INTERNAL_IPS = ['127.0.0.1', '0.0.0.0']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     # 'backend.com', # your domain
-
     'https://localhost:3000',
     'https://127.0.0.1:3000',
     'https://localhost:8000',
@@ -298,6 +297,8 @@ CORS_ORIGIN_WHITELIST = (
     'https://0.0.0.0:3000',
     'https://crib.local',
     'crib.local',
+    'https://crib.local:4001',
+    'https://crib.local:8000',
 )
 
 CORS_ALLOW_CREDENTIALS = True

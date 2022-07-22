@@ -4,7 +4,7 @@
   </a>
 </div>
 
-<style lang="scss">
+<style>
   .branding {
     background-color: var(--mdc-theme-primary, #fff);
     /* background-color: transparent; */
@@ -17,10 +17,9 @@
     font-size: 1.1em;
     line-height: 2em;
     font-weight: 500;
-
-    img {
-      width: 250px;
-      display: block;
-    }
+  }
+  img {
+    width: 250px;
+    display: block;
   }
 </style>

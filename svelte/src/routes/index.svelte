@@ -32,8 +32,6 @@
   import LayoutGrid, { Cell } from "@smui/layout-grid";
   import Card, { Content } from "@smui/card";
 
-  // let y;
-  // let visible;
   let drawervisible = false;
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
@@ -41,17 +39,7 @@
     console.log("toggleMenu");
     dispatch("message");
   }
-
-  //   query NewQuery {
-  //   pages {
-  //     nodes {
-  //       content
-  //     }
-  //   }
-  // }
 </script>
-
-<TestPost />
 
 <ScrollActions let:visible>
   {#if visible}
@@ -65,8 +53,6 @@
     <NavDrawer bind:open />
   {/if}
 </ScrollActions>
-
-<!-- <LogoHero /> -->
 
 <ScrollActions let:visible>
   <!-- <BlueTriangles /> -->
@@ -267,146 +253,6 @@
   </Cell>
 </LayoutGrid>
 
-<!-- split layout
-<LayoutGrid class="center">
-  <Cell span={6} class="cell center">
-    <div>
-      <h1
-        align=" middle"
-        class="bold "
-        style="font-size: 4em;text-transform: uppercase;"
-      >
-        Biologics Data
-      </h1>
-      <p>
-        Curated Medical and Business innovations in therapeutic Biologic
-        combination drugs.
-      </p>
-    </div>
-  </Cell>
-  <Cell span={6} class="cell  center">
-    <img
-      height="600px"
-      width="100%"
-      src="https://images.pexels.com/photos/5726666/pexels-photo-5726666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-    />
-  </Cell>
-  <Cell span={6} class="cell center">
-    <img
-      height="600px"
-      width="100%"
-      src="https://images.pexels.com/photos/5726666/pexels-photo-5726666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-    />
-  </Cell>
-  <Cell span={6} class="cell  center">
-    <div>
-      <h1
-        align=" middle"
-        class="bold "
-        style="font-size: 4em;text-transform: uppercase;"
-      >
-        Pharmacology Startups
-      </h1>
-      <p>
-        Curated Business innovations in therapeutic clinical trials for
-        combination drugs.
-      </p>
-    </div>
-  </Cell>
-  <Cell span={6} class="cell center">
-    <div>
-      <h1
-        align=" middle"
-        class="bold "
-        style="font-size: 4em;text-transform: uppercase;"
-      >
-        Clinical Trial Trends
-      </h1>
-      <p>Curated Medical trial trends and historic data ineractions.</p>
-    </div>
-  </Cell>
-  <Cell span={6} class="cell  center">
-    <img
-      height="600px"
-      width="100%"
-      src="https://images.pexels.com/photos/5726666/pexels-photo-5726666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-    />
-  </Cell>
-</LayoutGrid>
- -->
-<!-- Tri-layout
-<LayoutGrid class="center">
-  <Cell span={4} class="cell rounded mdc-elevation--z1 center">
-    <div>
-      <h1>Active Pharma Ingredients</h1>
-      <p>
-        <IconButton
-          class="material-icons dark btn-lg"
-          aria-label="vaccines"
-          --font-size="10em"
-        >
-          vaccines
-        </IconButton>
-      </p>
-    </div>
-  </Cell>
-  <Cell span={4} class="cell rounded mdc-elevation--z1 center">
-    <div>
-      <h1>Organizations</h1>
-      <p>
-        <IconButton
-          inline="true"
-          class="material-icons dark "
-          aria-label="groups"
-          --font-size="10em"
-        >
-          groups
-        </IconButton>
-      </p>
-    </div>
-  </Cell>
-  <Cell span={4} class="cell rounded mdc-elevation--z1 center">
-    <h1>Clinical Trials</h1>
-
-    <IconButton
-      class="material-icons dark "
-      aria-label="biotech"
-      --font-size="10em"
-    >
-      biotech
-    </IconButton>
-  </Cell>
-</LayoutGrid>
--->
-<!-- 1/3rds-layout
-<LayoutGrid class="center">
-  <Cell span={4} class="cell rounded mdc-elevation--z1 center">
-    <div>
-      <h1>Welcome to SvelteKit</h1>
-    </div>
-  </Cell>
-  <Cell span={8} class="cell rounded mdc-elevation--z1 center">
-    <p>
-      Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-    </p>
-  </Cell>
-</LayoutGrid>
--->
-
-<!-- Reverse 1/3rds-layout
-<LayoutGrid class="center">
-  <Cell span={8} class="cell rounded mdc-elevation--z1 center">
-    <div>
-      <h1>Welcome to SvelteKit</h1>
-    </div>
-  </Cell>
-  <Cell span={4} class="cell rounded mdc-elevation--z1 center">
-    <p>
-      Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-    </p>
-  </Cell>
-</LayoutGrid>
- -->
 <style>
   .cell {
     height: 60px;

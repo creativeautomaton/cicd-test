@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { TopAppBarComponentDev } from "@smui/top-app-bar";
   import TopAppBar, {
     Row,
     Section,
@@ -15,8 +14,8 @@
 
   // scroll actions
   import ScrollActions from "$lib/scroll-actions.svelte";
-
-  let topAppBar: TopAppBarComponentDev;
+  // import Topbar from "$lib/header/topbar.svelte";
+  import NavMenu from "$lib/header/nav-menu.svelte";
 
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
@@ -28,10 +27,14 @@
   import { fade, blur, fly, slide, scale, crossfade } from "svelte/transition";
   import { quintOut } from "svelte/easing";
   // let visible = true;
+
+  function setActive(value) {
+    active = value;
+  }
 </script>
 
 <div transition:fly={{ y: 200, duration: 0 }} class="hid den">
-  <TopAppBar bind:this={topAppBar} variant="fixed" color="secondary">
+  <TopAppBar variant="fixed" color="secondary">
     <BrandBanner />
     <Row>
       <Section>

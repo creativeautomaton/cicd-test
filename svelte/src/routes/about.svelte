@@ -73,7 +73,8 @@
   //     ${pageQuery}
   //   `
   // );
-  let url = "http://localhost:8000/graphql/";
+  // let url = "http://localhost:8000/graphql/";
+  import TestPost from "$lib/test-post.svelte";
 </script>
 
 <NavDrawer bind:open />
@@ -87,6 +88,7 @@
     </div>
   </Cell>
   <Cell span={12} class="cell  center">
+    <TestPost />
     <!-- {#if _data}
       {#each _data as page}
         <h1>{page.title}</h1>

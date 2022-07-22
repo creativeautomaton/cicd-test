@@ -46,6 +46,7 @@ class UserQuery(DjangoObjectType):
     class Meta:
         model = User
 
+
 class Query(graphene.ObjectType):
 
     users = graphene.List(UserQuery)
@@ -53,7 +54,17 @@ class Query(graphene.ObjectType):
     pages = graphene.List(PageQuery)
     pages_meta = graphene.List(PageMetaQuery)
 
-    def resolve_pages(self, info):
+    page_by_slug = graphene.Field(PageQuery, slug=graphene.String())
+    page_by_id = graphene.Field(PageQuery, id=graphene.String()) 
+
+    def resolve_page_by_slug(self, info, slug):
+        return Page.objects.get(slug=slug)
+
+    def resolve_page_by_id(self, info, id):
+        return Page.objects.get(pk=id)
+        # return list(Page.objects.filter(slug=slug).values())[0]
+
+    def resolve_pages(self, info, **kwargs):
         return Page.objects.all()
 
     def resolve_pages_meta(self, info):
@@ -64,6 +75,7 @@ class Query(graphene.ObjectType):
 
     def resolve_users(self, info):
         return User.objects.all()
+
 
     # this defines a Field `hello` in our Schema with a single Argument `name`
     hello = graphene.String(name=graphene.String(default_value="stranger"))

@@ -22,7 +22,7 @@
   </LayoutGrid>
 </div>
 
-<style lang="scss">
+<style>
   .colophon {
     background-color: var(--mdc-theme-primary, #fff);
   }

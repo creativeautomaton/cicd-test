@@ -11,36 +11,50 @@
 }
   `);
 </script> -->
-<script lang="js">
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append(
-    "Cookie",
-    "csrftoken=XwuNairbexHLxVDI0Khuvrr9wPRKi8IjJpKy8SVLRwymOsuFBPHb72GMg7rbJvNG"
-  );
-
-  var graphql = JSON.stringify({
-    query:
-      "{\n  pages {\n    id\n    title\n    slug\n    content\n    status\n    template\n    author {\n      id\n      firstName\n      lastName\n    }\n  }\n  pagesMeta {\n    pageId {\n      id\n    }\n    title\n    description\n    image\n  }\n}\n",
-    variables: {},
-  });
-  var requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    body: graphql,
-    redirect: "follow",
-  };
-
-  export let pages = [];
-
-  fetch("https://crib.local/graphql/", requestOptions)
-    .then((response) => response.text())
-    .then((result) => () => {
-      pages = result;
-      console.log(result);
+<script>
+  import { onMount } from "svelte";
+  let country;
+  let pages;
+  let pageArray = [];
+  let query = `{
+    pageBySlug(slug: "about-crib"){
+        id
+        title
+        slug
+        content
+        }
+      }
+  `;
+  onMount(async () => {
+    let response = await fetch("https://crib.local/graphql/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query }),
     })
-    .catch((error) => console.log("error", error));
+      .then((response) => response.json())
+      .then((result) => (pages = result))
+      .catch((error) => console.log("error", error));
+
+    console.log(pages);
+    pageArray = [pages.data.pageBySlug];
+    console.log(pageArray);
+  });
 </script>
+
+<div>
+  {#if pages}
+    {#each pageArray as page}
+      <a href={page.slug}>
+        <h2>{page.title}</h2>
+      </a>
+      <p>
+        {@html page.content}
+      </p>
+    {/each}
+  {:else}
+    <p>loading content...</p>
+  {/if}
+</div>
 
 <div>
   <ul>

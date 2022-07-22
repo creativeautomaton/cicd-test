@@ -1,17 +1,19 @@
-FROM python:3.9
+FROM python:3.9-slim-buster
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV DATABASE_URL=$DATABASE_URL
 ENV DEBUG=$DEBUG
 ENV SECRET_KEY=$SECRET_KEY
 EXPOSE 8000
+EXPOSE 8001
+EXPOSE 443
 WORKDIR /django-project
 
 COPY requirements.txt /django-project
 #COPY volt-test /django
-RUN pip install --upgrade pip
-#RUN pip install gunicorn
+RUN echo pip install --upgrade pip
 RUN echo pip install -e $OLDPWD/django-gunicorn/volt-test
+RUN pip install psycopg2-binary
 RUN pip install -r requirements.txt --no-cache-dir
 COPY . /django-project
 
@@ -19,14 +21,3 @@ COPY . /django-project
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
-
-
-
-
-
-
-#RUN /usr/local/bin/python -m pip install --upgrade pip
-#RUN python manage.py makemigrations --noinput
-#CMD uwsgi --https=0.0.0.0:80 --module=backend.wsgi
-#CMD python manage.py makemigrations --noinput python manage.py migrate export uwsgi --http=0.0.0.0:80 --module=backend.wsgi
-#CMD ["manage.py", "runserver", "0.0.0.0:8000"]
